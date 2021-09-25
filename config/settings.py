@@ -34,7 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     # 'users',
-    'users.apps.AccountConfig', # ユーザー認証
+    'users.apps.MainConfig', # ユーザー認証
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,3 +128,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ログイン
+LOGIN_URL = 'users:login' # ログインのURLの設定
+LOGIN_REDIRECT_URL = 'users:top' #ログインが完了した後に遷移するURL
