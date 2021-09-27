@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block  %}   
+<h1 class="mt-5 pt-4 text-center">検索</h1>
+
+<!-- 検索フォーム -->
+<div class="d-flex justify-content-center">
+<form class="form-inline my-2" method="GET" action="{% url 'blog_app:index' %}">
+ <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
+ <button type="submit" value="search" class="btn btn-primary">検索</button>
+</form>
+</div>
+<!-- 検索フォーム -->
+
+<!-- 検索結果の数 -->
+{% if query %}
+<p class="text-center font-weight-bold h4">{{posts.count}}件</p>
+{% endif%}
+{% endblock %}
+<!-- 検索結果の数 -->
