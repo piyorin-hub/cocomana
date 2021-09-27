@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from users.models import Places, Evals
 
 # Create your views here.
-def add_space(request):
+def add_space(request, form):
     if request.method == 'POST':
-        request.POST[""]
+        Places = form.save()
     return HttpResponse(request.user.id)
