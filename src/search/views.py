@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from django.db.models import Q
+from users.models import Places
+
+def index(request):
+    return render(request, "search/index.html")
 # Create your views here.
 
 
