@@ -6,13 +6,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin 
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy # 遅延評価用
-# from .forms import LoginForm, SignupForm, UserUpdateForm , MyPasswordChangeForm
-# from django.shortcuts import redirect 
-# from .forms import LoginForm, SignupForm, UserUpdateForm 
-# from django.shortcuts import redirect, resolve_url 
-# from .forms import LoginForm, SignupForm, UserUpdateForm, MyPasswordChangeForm # 追加
-# from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView # 追加
-
 
 
 '''トップページ'''
