@@ -3,7 +3,7 @@ from django.shortcuts import render
 #from django.http import HttpResponse
 
 from users.models import Places ,Evals ,Reviews
-from . import forms
+from add_space import forms
 from django.db.models import Sum
 #from django.views.generic import TemplateView
 from django import forms

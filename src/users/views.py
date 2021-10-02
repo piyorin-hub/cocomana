@@ -77,7 +77,6 @@ class UserUpdate(OnlyYouMixin, generic.UpdateView):
         context["process_name"] = "Update"
         return context
 
-
 '''パスワード変更'''
 class PasswordChange(PasswordChangeView):
     form_class = MyPasswordChangeForm

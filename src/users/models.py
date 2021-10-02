@@ -11,13 +11,14 @@ class Places(models.Model): #ok
     place_name = models.TextField(max_length=50)
     open_time = models.TimeField(null=True, blank=True)
     close_time = models.TimeField(null=True, blank=True)
-    place_address = models.TextField(max_length=100)
+    prefecture = models.TextField(max_length=5) #都道府県
+    municipal = models.TextField(max_length=50) #市区町村
+    place_address = models.TextField(max_length=50) #残り
     wifi = models.BooleanField()
     charge = models.BooleanField()
     personal_space = models.BooleanField()
     place_cost = models.PositiveIntegerField(null=True, blank=True)
     place_category = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)]) #1:cafe, 2:コワーキングスペース, 3:food(マックとか), 4:図書館, 5:その他
-
 
 class Evals(models.Model):#ok
     evals_id = models.IntegerField(primary_key=True)
