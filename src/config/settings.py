@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'add_space',
     'mypage',
+    'space', #スペース詳細
     'users.apps.MainConfig', # ユーザー認証
     'django.contrib.admin',
     'django.contrib.auth',
