@@ -1,13 +1,55 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
-<head>
-  <title>スペースの詳細</title>
-</head>
-<body>
-  <h1>{{ space.place_name }}</h1>
-  <div style="width: 70%;margin: 0px auto;">
-    <div style="margin: 60px 20px;">
-    </div>
-  </div>
-</body>
-</html>
+<html lang="en">
+    <head>
+        <title>スペース詳細</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'space/styles.css' %}">
+    </head>
+    <body>
+        <h1>{{ space.place_name }}!</h1>
+        {% if space.wifi %}
+            <img src="{% static 'space/wifi.png' %}">
+        {% else %}
+            
+        {% endif %}
+        {% if space.charge %}
+        　　<img src="{% static 'space/plug.png' %}">
+        {% else %}
+        
+        {% endif %}
+        {% if space.personal_space %}
+        　　<img src="{% static 'space/key.png' %}">
+        {% else %}
+            
+        {% endif %}
+        <div>
+          <p>静か　:<span class="star5_rating" data-rate="{{ evals.concentrations }}"></span></p>
+          <p>集中　:<span class="star5_rating" data-rate="{{ evals.silence }}"></span></p>
+          <p>コスパ:<span class="star5_rating" data-rate="{{ evals.cost_pafo }}"></span></p>
+          <p>混雑さ:<span class="star5_rating" data-rate="{{ evals.conges }}"></span></p>
+        </div>
+        <p>オープン時間{{ space.open_time }}</p>
+        <p>クローズ時間{{ space.close_time }}</p>
+        <p>住所：{{ space.place_address }}</p>
+        <p>コーヒーの値段：{{ space.place_cost }}</p>
+
+        <h3>口コミ</h3>
+
+        {% for review in reviews %}
+          <p>ユーザーID　:{{ review.review_user_id }}</p>
+          <p>コメント　:{{ review.review_comment }}</p>
+        {% endfor %}
+
+        <h3>口コミ書き込み</h3>
+        <form action="{% url 'space:index' %}" method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit">
+        </form>
+
+        
+    </body>
+</html

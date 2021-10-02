@@ -27,12 +27,13 @@ from .forms import SaveForm
 
 #         return render(request, "users/top.html")
 
-class SaveSpace(generic.CreateView):
+class SaveSpace(generic.edit.FormView):
     template_name = 'add_space/add_space.html'
     form_class =SaveForm
 
-    def form_valid(self, form):
-        user = form.save() # formの情報を保存
+    def form_valid(self, form): #postの時の処理
+        #print("form",form.data.get("place_name"))
+        places = form.save() # formの情報を保存
         return redirect('users:top')
 
     # データ送信

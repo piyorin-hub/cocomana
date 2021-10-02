@@ -18,7 +18,6 @@ class Places(models.Model): #ok
     place_cost = models.PositiveIntegerField(null=True, blank=True)
     place_category = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)]) #1:cafe, 2:コワーキングスペース, 3:food(マックとか), 4:図書館, 5:その他
 
-
 class Evals(models.Model):#ok
     evals_id = models.IntegerField(primary_key=True)
     place_id = models.ForeignKey(Places, on_delete=models.CASCADE) #外部キー
