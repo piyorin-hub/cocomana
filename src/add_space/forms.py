@@ -7,12 +7,14 @@ class SaveForm(forms.ModelForm):
 
     class Meta:
         model = Places
-        fields = ('place_name', 'open_time', 'close_time','place_address', 'wifi', 'charge', 'personal_space', 'place_cost', 'place_category')
+        fields = ('place_name', 'open_time', 'close_time','prefecture','municipal','place_address', 'wifi', 'charge', 'personal_space', 'place_cost', 'place_category')
         labels = {
             'place_name':"スペースの名前",
             'open_time':"営業開始時間",
             'close_time':"閉店時間",
-            'place_address':"お店の住所",
+            'prefecture' : "都道府県",
+            'municipal': "市区町村",
+            'place_address': "番地と建物名",
             'wifi':"wifiの有無",
             'charge':"コンセントの有無",
             'personal_space':"個室の有無",

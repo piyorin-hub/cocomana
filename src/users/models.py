@@ -11,7 +11,9 @@ class Places(models.Model): #ok
     place_name = models.TextField(max_length=50)
     open_time = models.TimeField(null=True, blank=True)
     close_time = models.TimeField(null=True, blank=True)
-    place_address = models.TextField(max_length=100)
+    prefecture = models.TextField(max_length=5) #都道府県
+    municipal = models.TextField(max_length=50) #市区町村
+    place_address = models.TextField(max_length=50) #残り
     wifi = models.BooleanField()
     charge = models.BooleanField()
     personal_space = models.BooleanField()
