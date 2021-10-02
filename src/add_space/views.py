@@ -32,7 +32,7 @@ class SaveSpace(generic.CreateView):
     form_class =SaveForm
 
     def form_valid(self, form):
-        user = form.save() # formの情報を保存
+        places = form.save() # formの情報を保存
         return redirect('users:top')
 
     # データ送信
