@@ -21,23 +21,23 @@ def space(request):
             i = Reviews(review_comment=review)
             i.save()
                 
-    space = Places.objects.get(place_id = 2)
+    space = Places.objects.get(place_id = 1)
 
-    reviews = Reviews.objects.filter(review_place_id = 2).all()
+    reviews = Reviews.objects.filter(review_place_id = 1).all()
 
     evals ={"concentrations":0, "silence":0, "cost_pafo":0, "conges":0}
 
-    product_count = Evals.objects.filter(place_id = 2).count()
+    product_count = Evals.objects.filter(place_id = 1).count()
 
-    obj_1 = Evals.objects.filter(place_id = 2).aggregate(concentrations = Sum('concentrations'))
-    obj_2 = Evals.objects.filter(place_id = 2).aggregate(silence = Sum('silence'))
-    obj_3 = Evals.objects.filter(place_id = 2).aggregate(cost_pafo = Sum('cost_pafo'))
-    obj_4 = Evals.objects.filter(place_id = 2).aggregate(conges = Sum('conges'))
+    #obj_1 = Evals.objects.filter(place_id = 1).aggregate(concentrations = Sum('concentrations'))
+    #obj_2 = Evals.objects.filter(place_id = 1).aggregate(silence = Sum('silence'))
+    #obj_3 = Evals.objects.filter(place_id = 1).aggregate(cost_pafo = Sum('cost_pafo'))
+    #obj_4 = Evals.objects.filter(place_id = 1).aggregate(conges = Sum('conges'))
     
-    evals["concentrations"] = round( obj_1["concentrations"] / product_count)
-    evals["silence"] = round( obj_2["silence"] / product_count)
-    evals["cost_pafo"] = round( obj_3["cost_pafo"] / product_count)
-    evals["conges"] = round( obj_4["conges"] / product_count)
+    #evals["concentrations"] = round( obj_1["concentrations"] / product_count)
+    #evals["silence"] = round( obj_2["silence"] / product_count)
+    #evals["cost_pafo"] = round( obj_3["cost_pafo"] / product_count)
+    #evals["conges"] = round( obj_4["conges"] / product_count)
 
 
     return render(request, "space/index.html",{
