@@ -1,11 +1,8 @@
 {% extends "layout.html" %}
+{% load static %}
 
 <!-- コンテンツ -->
 {% block content %}
-<div id="star"></div>
-<script type="text/javascript">
-  $('#star').raty();
-</script>
 <div class="container">
   <div class="col-md-6 offset-md-3">
     <div class="card mt-3 mb-3 bg-light">
@@ -27,6 +24,13 @@
           {% endfor %}
           <!-- {% csrf_token %} -->
           <!-- ボタン -->
+          <div id="star"></div>
+          <script type="text/javascript">
+            $('#star').raty({
+              starOff:"{% static 'add_space/images/star-off.png' %}",
+              starOn:"{% static 'add_space/images/star-on.png' %}",
+            });
+          </script>
           
           <button type="button" class="btn btn-outline-secondary btn-lg btn-block mt-4" onclick="history.back()">キャンセル</button>
           <button type="submit" class="btn btn-success btn-lg btn-block mt-2" >{{ process_name }}</button>
