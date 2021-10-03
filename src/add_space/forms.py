@@ -21,3 +21,4 @@ class SaveForm(forms.ModelForm):
             'place_cost':"コーヒー一杯の値段",
             'place_category':"スペースの種類"
         }
+

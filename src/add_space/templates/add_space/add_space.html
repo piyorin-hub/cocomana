@@ -14,7 +14,7 @@
       <div class="card-body">
         <form action="" method="POST">
           {% csrf_token %}
-          {{ form.non_field_errors }}
+          {{ formA.non_field_errors }}
           {% for field in form %}
             <div class="form-group">
               <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
