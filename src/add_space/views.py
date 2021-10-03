@@ -28,7 +28,7 @@ from .forms import SaveForm
 #         return render(request, "users/top.html")
 
 class SaveSpace(generic.edit.FormView):
-    template_name = 'add_space/star.html'
+    template_name = 'add_space/add_space.html'
     form_class =SaveForm
 
     def form_valid(self, form): #postの時の処理
