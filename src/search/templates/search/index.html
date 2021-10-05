@@ -5,8 +5,9 @@
 <div class="d-flex justify-content-center">
   <form class="form-inline my-2" method="GET" action="{% url 'search:index' %}">
    <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
-   <button type="submit" value="search" class="btn btn-primary">検索</button>
+   <button type="submit" value="q" class="btn btn-primary">検索</button>
   </form>
+  
   </div>
   
 {% for place in places %}
@@ -15,12 +16,13 @@
     <h5 class="card-header">{{ place.place_name }} </h5>
     <div class="card-body">
       
-      <h5 class="card-title">Special title treatment</h5>
+      <h5 class="card-title">概要</h5>
       <div>
         <p>静か　:<span class="star5_rating" data-rate="{{ eval.concentrations }}"></span></p>
         <p>集中　:<span class="star5_rating" data-rate="{{ eval.silence }}"></span></p>
         <p>コスパ:<span class="star5_rating" data-rate="{{ eval.cost_pafo }}"></span></p>
         <p>混雑さ:<span class="star5_rating" data-rate="{{ eval.conges }}"></span></p>
+        
       </div>
       {% if place.wifi %}
             <img src="{% static 'search/wifi.png' %}">
@@ -37,7 +39,6 @@
         {% else %}
             
         {% endif %}
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   {% endfor %}
