@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "layout_.html" %}
 {% load static %}
 
 <!-- コンテンツ -->
@@ -12,7 +12,7 @@
       </div>
       <!-- カードボディー -->
       <div class="card-body">
-        <form action="" method="POST">
+        <form action="" method="POST" name="space_form">
           {% csrf_token %}
           {{ place_form.non_field_errors }}
           {% for field in place_form %}
@@ -28,23 +28,23 @@
           {% for field in evals_form %}
             <div class="form-group" id="{{field.id_for_label}}">
               <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-              <input type="hidden" name="{{ field.html_name }}" id="{{field.id_for_label}}" />
+              <input type="hidden" name="{{ field.html_name }}" id="{{field.id_for_label}}_" />
               {{ field.errors }}
             </div>
             <script type="text/javascript">
               $('#{{field.id_for_label}}').raty({
                 starOff:"{% static 'add_space/images/star-off.png' %}",
                 starOn:"{% static 'add_space/images/star-on.png' %}",
-                hints:['bad', 'poor', 'regular', 'good', 'gorgeous'],
+                hints:['悪い', '普通', '良い', 'すごい良い', '最高'],
                 click : function (score, evt) {
-                  $("#{{field.id_for_label}}").val(score);
+                  $("#{{field.id_for_label}}_").val(score);
                 },
               });
             </script>
           {% endfor %}
           
           <button type="button" class="btn btn-outline-secondary btn-lg btn-block mt-4" onclick="history.back()">キャンセル</button>
-          <button type="submit" class="btn btn-success btn-lg btn-block mt-2" >{{ process_name }}</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block mt-2" onClick="return check();">{{ process_name }}</button>
         </form>
       </div>
     </div>
