@@ -14,8 +14,8 @@
       <div class="card-body">
         <form action="" method="POST">
           {% csrf_token %}
-          {{ place_form.non_field_errors }}
-          {% for field in place_form %}
+          {{ formA.non_field_errors }}
+          {% for field in form %}
             <div class="form-group">
               <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
               {{ field }}
@@ -24,24 +24,13 @@
           {% endfor %}
           <!-- {% csrf_token %} -->
           <!-- ボタン -->
-          {{ evals_form.non_field_errors }}
-          {% for field in evals_form %}
-            <div class="form-group" id="{{field.id_for_label}}">
-              <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-              <input type="hidden" name="{{ field.html_name }}" id="{{field.id_for_label}}" />
-              {{ field.errors }}
-            </div>
-            <script type="text/javascript">
-              $('#{{field.id_for_label}}').raty({
-                starOff:"{% static 'add_space/images/star-off.png' %}",
-                starOn:"{% static 'add_space/images/star-on.png' %}",
-                hints:['bad', 'poor', 'regular', 'good', 'gorgeous'],
-                click : function (score, evt) {
-                  $("#{{field.id_for_label}}").val(score);
-                },
-              });
-            </script>
-          {% endfor %}
+          <div id="star"></div>
+          <script type="text/javascript">
+            $('#star').raty({
+              starOff:"{% static 'add_space/images/star-off.png' %}",
+              starOn:"{% static 'add_space/images/star-on.png' %}",
+            });
+          </script>
           
           <button type="button" class="btn btn-outline-secondary btn-lg btn-block mt-4" onclick="history.back()">キャンセル</button>
           <button type="submit" class="btn btn-success btn-lg btn-block mt-2" >{{ process_name }}</button>
