@@ -23,7 +23,13 @@
         var cost_pafo = space_form.cost_pafo.value;
         var silence = space_form.silence.value;
         var conges = space_form.conges.value;
+        var category = space_form.place_category.value;
 
+        if ( category == '' ) {
+          alert ( "スペースの種類を選択してください。" );
+          space_form.place_category.focus();
+          return false;
+        }
         if ( concentrations == '' ) {
           alert ( "集中度の評価をしてください。" );
           space_form.concentrations.focus();

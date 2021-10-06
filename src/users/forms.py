@@ -62,7 +62,6 @@ class UserUpdateForm(forms.ModelForm):
 
 '''パスワード変更フォーム'''
 class MyPasswordChangeForm(PasswordChangeForm):
-
     # bootstrap4対応で、classを指定
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

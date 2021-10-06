@@ -16,11 +16,25 @@
           {% csrf_token %}
           {{ place_form.non_field_errors }}
           {% for field in place_form %}
+          {% if field.id_for_label == "id_place_category" %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+              <select name="place_category" id="id_place_category">
+                <option value="">-</option>
+                <option value="1">cafe</option>
+                <option value="2">コワーキングスペース</option>
+                <option value="3">飲食店</option>
+                <option value="4">図書館</option>
+                <option value="5">その他</option>
+              </select>
+            </div>
+          {% else %}
             <div class="form-group">
               <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
               {{ field }}
               {{ field.errors }}
             </div>
+          {% endif %}
           {% endfor %}
           <!-- {% csrf_token %} -->
           <!-- ボタン -->
