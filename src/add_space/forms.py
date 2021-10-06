@@ -30,6 +30,6 @@ class EvalsForm(forms.ModelForm):
             'concentrations':"集中度",
             'silence':"静かさ",
             'cost_pafo':"コストパフォーマンス",
-            'conges' : "空いてる度",
+            'conges' : "空いている度",
         }
         exclude = ('place_id',)
