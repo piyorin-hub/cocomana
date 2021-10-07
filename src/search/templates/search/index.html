@@ -11,7 +11,7 @@
   </div>
   
 {% for place in places %}
-{% for eval in evals %}
+
 <div class="card">
     <h5 class="card-header">{{ place.place_name }} </h5>
     <div class="card-body">
@@ -42,7 +42,7 @@
       <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
   {% endfor %}
-  {% endfor %}
+  
 </div>
 
 {% endblock %}
