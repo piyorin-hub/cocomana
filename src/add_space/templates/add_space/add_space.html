@@ -1,4 +1,5 @@
-{% extends "layout.html" %}
+{% extends "layout_.html" %}
+{% load static %}
 
 <!-- コンテンツ -->
 {% block content %}
@@ -11,27 +12,53 @@
       </div>
       <!-- カードボディー -->
       <div class="card-body">
-        <form action="" method="POST">
+        <form action="" method="POST" name="space_form">
           {% csrf_token %}
-          {{ form.non_field_errors }}
-          {% for field in form %}
+          {{ place_form.non_field_errors }}
+          {% for field in place_form %}
+          {% if field.id_for_label == "id_place_category" %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+              <select name="place_category" id="id_place_category">
+                <option value="">-</option>
+                <option value="1">cafe</option>
+                <option value="2">コワーキングスペース</option>
+                <option value="3">飲食店</option>
+                <option value="4">図書館</option>
+                <option value="5">その他</option>
+              </select>
+            </div>
+          {% else %}
             <div class="form-group">
               <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
               {{ field }}
               {{ field.errors }}
             </div>
+          {% endif %}
           {% endfor %}
           <!-- {% csrf_token %} -->
           <!-- ボタン -->
-          <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-          <script src="src\add_space\static\add_space\jquery.raty.js"></script> -->
-
-          <!-- <div></div>
-          <script type="text/javascript">
-            $('div').raty();
-          </script> -->
+          {{ evals_form.non_field_errors }}
+          {% for field in evals_form %}
+            <div class="form-group" id="{{field.id_for_label}}">
+              <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+              <input type="hidden" name="{{ field.html_name }}" id="{{field.id_for_label}}_" />
+              {{ field.errors }}
+            </div>
+            <script type="text/javascript">
+              $('#{{field.id_for_label}}').raty({
+                starOff:"{% static 'add_space/images/star-off.png' %}",
+                starOn:"{% static 'add_space/images/star-on.png' %}",
+                hints:['悪い', '普通', '良い', 'すごい良い', '最高'],
+                click : function (score, evt) {
+                  $("#{{field.id_for_label}}_").val(score);
+                },
+              });
+            </script>
+          {% endfor %}
+          
           <button type="button" class="btn btn-outline-secondary btn-lg btn-block mt-4" onclick="history.back()">キャンセル</button>
-          <button type="submit" class="btn btn-success btn-lg btn-block mt-2" >{{ process_name }}</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block mt-2" onclick="return check();">{{ process_name }}</button>
         </form>
       </div>
     </div>

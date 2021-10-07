@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from users.models import Places
+from users.models import Places, Evals
 
 
 class SaveForm(forms.ModelForm):
@@ -21,3 +21,15 @@ class SaveForm(forms.ModelForm):
             'place_cost':"コーヒー一杯の値段",
             'place_category':"スペースの種類"
         }
+
+class EvalsForm(forms.ModelForm):
+    class Meta:
+        model = Evals
+        fields = ('concentrations', 'silence', 'cost_pafo', 'conges')
+        labels = {
+            'concentrations':"集中度",
+            'silence':"静かさ",
+            'cost_pafo':"コストパフォーマンス",
+            'conges' : "空いている度",
+        }
+        exclude = ('place_id',)

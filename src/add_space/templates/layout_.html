@@ -13,7 +13,46 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'add_space/styles.css' %}">
-    <title>ユーザー登録・更新</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static 'add_space/jquery.raty.js' %}"></script>
+    <title>スペースの登録</title>
+    
+    <script type="text/javascript">
+      function check() {
+        var concentrations = space_form.concentrations.value;
+        var cost_pafo = space_form.cost_pafo.value;
+        var silence = space_form.silence.value;
+        var conges = space_form.conges.value;
+        var category = space_form.place_category.value;
+
+        if ( category == '' ) {
+          alert ( "スペースの種類を選択してください。" );
+          space_form.place_category.focus();
+          return false;
+        }
+        if ( concentrations == '' ) {
+          alert ( "集中度の評価をしてください。" );
+          space_form.concentrations.focus();
+          return false;
+        }
+        if ( silence == '' ) {
+          alert ( "静かさの評価をしてください。" );
+          space_form.silence.focus();
+          return false;
+        }
+        if ( cost_pafo == '' ) {
+          alert ( "コストパフォーマンスの評価をしてください。" );
+          space_form.cost_pafo.focus();
+          return false;
+        }
+        if ( conges == '' ) {
+          alert ( "空いている度の評価をしてください。" );
+          space_form.conges.focus();
+          return false;
+        }
+        return true;
+      }
+    </script>
   </head>
   <body>
     <!-- ナビバー -->
