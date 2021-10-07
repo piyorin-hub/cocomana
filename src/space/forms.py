@@ -1,18 +1,15 @@
 from django import forms
-#モデルクラスを呼出
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from users.models import Reviews
 
-#フォームクラス作成
-class Contact_Form(forms.ModelForm):
 
-    class Meta():
-        #①モデルクラスを指定
+class SaveForm(forms.ModelForm):
+
+    class Meta:
         model = Reviews
-
-        #②表示するモデルクラスのフィールドを定義
-        fields = ('review_user_id','review_comment')
-
-        #③表示ラベルを定義
-        labels = {'review_user_id':"id",
-                  'review_comment':"コメント",
+        fields = ('review_place_id','review_user_id','review_comment')
+        labels = {
+            'review_place_id':"スペースのid",
+            'review_user_id':"ユーザーのid",
+            'review_comment':"レビューのコメント",
         }

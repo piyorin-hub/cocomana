@@ -33,7 +33,7 @@
         </div>
         <p>オープン時間{{ space.open_time }}</p>
         <p>クローズ時間{{ space.close_time }}</p>
-        <p>住所：{{ space.place_address }}</p>
+        <p>住所：{{ space.prefecture }}{{ space.municipal }}{{ space.place_address }}</p>
         <p>コーヒーの値段：{{ space.place_cost }}</p>
 
         <h3>口コミ</h3>
@@ -43,13 +43,7 @@
           <p>コメント　:{{ review.review_comment }}</p>
         {% endfor %}
 
-        <h3>口コミ書き込み</h3>
-        <form action="{% url 'space:index' %}" method="POST">
-          {% csrf_token %}
-          {{ form }}
-          <input type="submit">
-        </form>
-
+        <a href="{% url 'space:add_review' %}">レビューを追加する</a>
         
     </body>
-</html
+</html>

@@ -1,5 +1,5 @@
 from django.db import connection, connections
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 #from django.http import HttpResponse
 
 from users.models import Places ,Evals ,Reviews
@@ -7,24 +7,30 @@ from add_space import forms
 from django.db.models import Sum
 #from django.views.generic import TemplateView
 from django import forms
+from django.views import generic
+from .forms import SaveForm
 
-class NewReviewForm (forms.Form):
-    id = forms.CharField(label="ユーザーid")
-    review = forms.CharField(label="コメント")
+class SaveSpace(generic.edit.FormView):
+    template_name = 'space/add_review.html'
+    form_class =SaveForm
 
-def space(request):
-    if request.method == 'POST':
-        form = NewReviewForm(request.POST)
-        if form.is_valid():
-            id = form.cleaned_data["id"]
-            review = form.cleaned_data["review"]
-            i = Reviews(review_comment=review)
-            i.save()
-                
+    def form_valid(self, form): #postの時の処理
+        #print("form",form.data.get("place_name"))
+        places = form.save() # formの情報を保存
+        return redirect('space:index')
+        
+
+    # データ送信
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["process_name"] = "レビューの追加"
+        return context
+
+def index(request):
     space = Places.objects.get(place_id = 1)
-
+    
     reviews = Reviews.objects.filter(review_place_id = 1).all()
-
+    
     evals ={"concentrations":0, "silence":0, "cost_pafo":0, "conges":0}
 
     product_count = Evals.objects.filter(place_id = 1).count()
@@ -41,5 +47,7 @@ def space(request):
 
 
     return render(request, "space/index.html",{
-        'space':space,'evals':evals,'count':product_count,'reviews':reviews,'form':NewReviewForm()})
+        'space':space,'evals':evals,'count':product_count,'reviews':reviews})
+                    
+        
 
