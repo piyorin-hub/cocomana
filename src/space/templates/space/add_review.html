@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>口コミ</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'space/styles.css' %}">
+    </head>
+    <body>
+        <h3>口コミ書き込み</h3>
+        <form action="{% url 'space:add_review' %}" method="POST">
+          {% csrf_token %}
+          {{ form }}
+          <input type="submit">
+        </form>
+    </body>
+</html>
