@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import UserPassesTestMixin 
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy # 遅延評価用
-
+from users.models import Places, Favo
 
 '''トップページ'''
 class TopView(generic.TemplateView):
@@ -38,7 +38,25 @@ class OnlyYouMixin(UserPassesTestMixin):
 class MyPage(OnlyYouMixin, generic.DetailView):
     model = User
     template_name = 'users/my_page.html'
-    # モデル名小文字(user)でモデルインスタンスがテンプレートファイルに渡される
+
+    def show(request):
+        space = Places.objects.first()
+        return render(request, 'users/my_page.html', {
+            'space': space
+        })
+
+    # def show_favorite(self, request):
+    #     user_id= self.request.user
+    #     # favo_place_id = Favo.objects.filter(user_id=user_id).all()
+    #     favo_place_id = user_id.favo_set.all()
+    #     print(favo_place_id)
+    #     #　favoにあるplace_idからplaceをとる
+    #     favorite_places = Places.objects.filter(place_id=favo_place_id).all()
+        
+    #     return render(request, "users/my_page.html", {
+    #         'favorite_places':favorite_places
+    #     })
+
 
 
 '''サインアップ'''
@@ -93,3 +111,6 @@ class PasswordChange(PasswordChangeView):
 '''パスワード変更完了'''
 class PasswordChangeDone(PasswordChangeDoneView):
     template_name = 'users/password_change_done.html'
+
+
+

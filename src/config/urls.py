@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('users.urls')),
     path('search/', include('search.urls')),  # 追加
     path('space/', include('space.urls')), #詳細ページ
+    path('mypage/', include('mypage.urls'))
 ]
