@@ -4,8 +4,7 @@ from django.db.models import Q
 
 def index(request):
      queries = request.GET.get('q')
-     evals = Evals.objects.values('place_id')
-     i = Evals.objects.all()
+     evals = Evals.objects.all()
      print(evals)
      if queries:
          if " " in queries or "　" in queries:
@@ -40,19 +39,10 @@ def index(request):
          places = Places.objects.all().order_by()
      place_id = Places.objects.values('place_id')
      print(Places.objects.values('place_id'))
-     k = []
-     for place in place_id:
-         for eval in evals:
-             if place == eval:
-                 
-                 k.append(eval)
-                 print(k)
-     print(k)            
-     print(places)
-     print(i)           
+          
      return render(request, "search/index.html", {
          'places': places, 'query': query,
-         'evals': i
+         'evals': evals
      })
     
     
