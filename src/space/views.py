@@ -8,23 +8,31 @@ from django.db.models import Sum
 #from django.views.generic import TemplateView
 from django import forms
 from django.views import generic
-from .forms import SaveForm
+from .forms import SaveForm, EvalsForm
 
-class SaveSpace(generic.edit.FormView):
-    template_name = 'space/add_review.html'
-    form_class =SaveForm
+def generateView(request):
+    if request.user.is_anonymous:#loginしていない場合勝手にloginページ
+        return redirect('users:login')
+    if request.method == 'POST': # If the form has been submitted...
+        form = SaveForm(request.POST)
+        if form.is_valid(): # All validation rules pass
+            place = Places.objects.get(place_id=1)
+            review_form = Reviews(review_place_id=place, review_user_id=request.user, review_comment=form.data.get("review_comment"))
+            evals_form = Evals(place_id=place, user_id=request.user, concentrations=form.data.get("concentrations"), silence=form.data.get("silence"), cost_pafo=form.data.get("cost_pafo"), conges=form.data.get("conges"))
+            review = review_form.save()
+            evals = evals_form.save()
+            return redirect('space:index')
 
-    def form_valid(self, form): #postの時の処理
-        #print("form",form.data.get("place_name"))
-        places = form.save() # formの情報を保存
-        return redirect('space:index')
-        
+    
+    review_form = SaveForm()
+    evals_form = EvalsForm()
+    process_name = "レビューの追加"
+    return render(request, 'space/add_review.html', {
+        "review_form": review_form,
+        "evals_form": evals_form,
+        "process_name": process_name,
+    })
 
-    # データ送信
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["process_name"] = "レビューの追加"
-        return context
 
 def index(request):
     space = Places.objects.get(place_id = 1)

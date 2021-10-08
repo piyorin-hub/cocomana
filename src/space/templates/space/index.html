@@ -1,49 +1,46 @@
+{% extends "layout_.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>スペース詳細</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'space/styles.css' %}">
-    </head>
-    <body>
-        <h1>{{ space.place_name }}!</h1>
-        {% if space.wifi %}
-            <img src="{% static 'space/wifi.png' %}">
-        {% else %}
-            
-        {% endif %}
-        {% if space.charge %}
-        　　<img src="{% static 'space/plug.png' %}">
-        {% else %}
-        
-        {% endif %}
-        {% if space.personal_space %}
-        　　<img src="{% static 'space/key.png' %}">
-        {% else %}
-            
-        {% endif %}
-        <div>
-          <p>静か　:<span class="star5_rating" data-rate="{{ evals.concentrations }}"></span></p>
-          <p>集中　:<span class="star5_rating" data-rate="{{ evals.silence }}"></span></p>
-          <p>コスパ:<span class="star5_rating" data-rate="{{ evals.cost_pafo }}"></span></p>
-          <p>混雑さ:<span class="star5_rating" data-rate="{{ evals.conges }}"></span></p>
-        </div>
-        <p>オープン時間{{ space.open_time }}</p>
-        <p>クローズ時間{{ space.close_time }}</p>
-        <p>住所：{{ space.prefecture }}{{ space.municipal }}{{ space.place_address }}</p>
-        <p>コーヒーの値段：{{ space.place_cost }}</p>
+<!-- !コンテンツ -->
+{% block content %}
 
-        <h3>口コミ</h3>
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'space/styles.css' %}">
+{% endblock %}
 
-        {% for review in reviews %}
-          <p>ユーザーID　:{{ review.review_user_id }}</p>
-          <p>コメント　:{{ review.review_comment }}</p>
-        {% endfor %}
+<h1>{{ space.place_name }}</h1>
+{% if space.wifi %}
+    <img src="{% static 'space/wifi.png' %}">
+{% else %}
+    
+{% endif %}
+{% if space.charge %}
+　　<img src="{% static 'space/plug.png' %}">
+{% else %}
 
-        <a href="{% url 'space:add_review' %}">レビューを追加する</a>
-        
-    </body>
-</html>
+{% endif %}
+{% if space.personal_space %}
+　　<img src="{% static 'space/key.png' %}">
+{% else %}
+    
+{% endif %}
+<div>
+  <p>静か　:<span class="star5_rating" data-rate="{{ evals.concentrations }}"></span></p>
+  <p>集中　:<span class="star5_rating" data-rate="{{ evals.silence }}"></span></p>
+  <p>コスパ:<span class="star5_rating" data-rate="{{ evals.cost_pafo }}"></span></p>
+  <p>混雑さ:<span class="star5_rating" data-rate="{{ evals.conges }}"></span></p>
+</div>
+<p>オープン時間{{ space.open_time }}</p>
+<p>クローズ時間{{ space.close_time }}</p>
+<p>住所：{{ space.prefecture }}{{ space.municipal }}{{ space.place_address }}</p>
+<p>コーヒーの値段：{{ space.place_cost }}</p>
+<div>
+  <h5>口コミ</h5>
+  {% for review in reviews %}
+    <p>ユーザーID　:{{ review.review_user_id }}</p>
+    <p>コメント　:{{ review.review_comment }}</p>
+  {% endfor %}
+  <a href="{% url 'space:add_review' %}" class="btn" style="border-radius: 5px;background-color: lightblue;padding: 10px;text-decoration: none;color: white;">レビューを追加する</a>
+</div>
+
+{% endblock %}

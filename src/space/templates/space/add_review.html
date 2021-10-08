@@ -1,19 +1,52 @@
+{% extends "layout_.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>口コミ</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'space/styles.css' %}">
-    </head>
-    <body>
-        <h3>口コミ書き込み</h3>
-        <form action="{% url 'space:add_review' %}" method="POST">
+<!-- コンテンツ -->
+{% block content %}
+<div class="container">
+  <div class="col-md-6 offset-md-3">
+    <div class="card mt-3 mb-3 bg-light">
+      <!-- カードヘッダー -->
+      <div class="card-header bg-success text-light">
+        <h4>{{ process_name }}</h4>
+      </div>
+      <!-- カードボディー -->
+      <div class="card-body">
+        <form action="" method="POST" name="space_form">
           {% csrf_token %}
-          {{ form }}
-          <input type="submit">
+          {% for field in review_form %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+            {{ field }}
+            {{ field.errors }}
+          </div>
+          {% endfor %}
+          <!-- {% csrf_token %} -->
+          <!-- ボタン -->
+          {{ evals_form.non_field_errors }}
+          {% for field in evals_form %}
+            <div class="form-group" id="{{field.id_for_label}}">
+              <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
+              <input type="hidden" name="{{ field.html_name }}" id="{{field.id_for_label}}_" />
+              {{ field.errors }}
+            </div>
+            <script type="text/javascript">
+              $('#{{field.id_for_label}}').raty({
+                starOff:"{% static 'add_space/images/star-off.png' %}",
+                starOn:"{% static 'add_space/images/star-on.png' %}",
+                hints:['悪い', '普通', '良い', 'すごい良い', '最高'],
+                click : function (score, evt) {
+                  $("#{{field.id_for_label}}_").val(score);
+                },
+              });
+            </script>
+          {% endfor %}
+          
+          <button type="button" class="btn btn-outline-secondary btn-lg btn-block mt-4" onclick="history.back()">キャンセル</button>
+          <button type="submit" class="btn btn-success btn-lg btn-block mt-2" onclick="return check();">{{ process_name }}</button>
         </form>
-    </body>
-</html>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

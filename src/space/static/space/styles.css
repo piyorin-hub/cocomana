@@ -23,6 +23,8 @@
     color: #ffcf32; /* イエローカラー 自由に設定化 */
 }
 
+
+
 .star5_rating[data-rate="5"]:after{ width: 100%; } /* 星5 */
 .star5_rating[data-rate="4.5"]:after{ width: 90%; } /* 星4.5 */
 .star5_rating[data-rate="4"]:after{ width: 80%; } /* 星4 */

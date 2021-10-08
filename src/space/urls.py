@@ -6,5 +6,5 @@ app_name ='space'
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("add_review",views.SaveSpace.as_view(),name="add_review")
+    path("add_review",views.generateView,name="add_review")
 ]
