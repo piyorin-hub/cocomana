@@ -10,6 +10,7 @@ from django import forms
 from django.views import generic
 from .forms import SaveForm, EvalsForm
 
+
 def generateView(request):
     if request.user.is_anonymous:#loginしていない場合勝手にloginページ
         return redirect('users:login')

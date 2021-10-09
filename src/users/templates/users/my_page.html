@@ -5,7 +5,7 @@
 <div class="container">
   <h1>お気に入り</h1>
   <hr>
-
+  {% csrf_token %}
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">1:{{ space.place_name }}</h5>
