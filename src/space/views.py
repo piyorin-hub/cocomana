@@ -34,19 +34,19 @@ def generateView(request):
     })
 
 
-def index(request):
-    space = Places.objects.get(place_id = 1)
+def index(request,placeid):
+    space = Places.objects.get(place_id = placeid)
     
-    reviews = Reviews.objects.filter(review_place_id = 1).all()
+    reviews = Reviews.objects.filter(review_place_id = placeid).all()
     
     evals ={"concentrations":0, "silence":0, "cost_pafo":0, "conges":0}
 
-    product_count = Evals.objects.filter(place_id = 1).count()
+    product_count = Evals.objects.filter(place_id = placeid).count()
 
-    obj_1 = Evals.objects.filter(place_id = 1).aggregate(concentrations = Sum('concentrations'))
-    obj_2 = Evals.objects.filter(place_id = 1).aggregate(silence = Sum('silence'))
-    obj_3 = Evals.objects.filter(place_id = 1).aggregate(cost_pafo = Sum('cost_pafo'))
-    obj_4 = Evals.objects.filter(place_id = 1).aggregate(conges = Sum('conges'))
+    obj_1 = Evals.objects.filter(place_id = placeid).aggregate(concentrations = Sum('concentrations'))
+    obj_2 = Evals.objects.filter(place_id = placeid).aggregate(silence = Sum('silence'))
+    obj_3 = Evals.objects.filter(place_id = placeid).aggregate(cost_pafo = Sum('cost_pafo'))
+    obj_4 = Evals.objects.filter(place_id = placeid).aggregate(conges = Sum('conges'))
     
     evals["concentrations"] = round( obj_1["concentrations"] / product_count)
     evals["silence"] = round( obj_2["silence"] / product_count)

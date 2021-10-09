@@ -45,7 +45,7 @@
             
         {% endif %}
         
-      <a href="{% url 'space:space' place_id=place.place_id %}" class="btn btn-primary">Go somewhere</a>
+      <a href="{% url 'space:index' placeid=place.place_id %}" class="btn btn-primary">Go somewhere</a>
     </div>
   {% endif %}
   {% endfor %}
