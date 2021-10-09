@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('', include('map.urls')),
     path('admin/', admin.site.urls),
     path('add_space/', include('add_space.urls')),
-    path('', include('users.urls')),
+    path('users/', include('users.urls')),
     path('search/', include('search.urls')),  # 追加
     path('space/', include('space.urls')), #詳細ページ
     path('mypage/', include('mypage.urls'))

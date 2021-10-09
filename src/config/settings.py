@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'add_space',
     'mypage',
     'space', #スペース詳細
+    'map',
     'users.apps.Users1Config', # ユーザー認証
     'django.contrib.admin',
     'django.contrib.auth',
