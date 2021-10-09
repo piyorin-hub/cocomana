@@ -8,11 +8,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy # 遅延評価用
 from users.models import Places, Favo
 
-'''トップページ'''
-class TopView(generic.TemplateView):
-    template_name = 'users/top.html'
-
-
 '''ログイン'''
 class Login(LoginView):
     form_class = LoginForm
