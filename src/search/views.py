@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from users.models import Places, Evals
+from django.shortcuts import render, redirect
+from users.models import Places, Evals, Favo
 from django.db.models import Q
 
 def index(request):
@@ -44,6 +44,15 @@ def index(request):
          'places': places, 'query': query,
          'evals': evals
      })
+
+def favorite(request, pk):
+    print(f"場所 {pk}")
+    place_obj = Places.objects.get(place_id=pk)
+    print(place_obj)
+    user = request.user
+    favo = Favo(favo_place_id=place_obj, favo_usr_id=user)
+    favo.save()
+    return redirect("search:index")
     
     
     
