@@ -7,14 +7,19 @@
 
 <div class="d-flex justify-content-center">
   <form class="form-inline my-2" method="GET" action="{% url 'search:index' %}">
-   <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
-   <button type="submit" value="q" class="btn btn-primary">検索</button>
+
+    <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
+    <button type="submit" value="q" class="btn btn-primary">検索</button>
+    
+    <button type="submit" value="silence" name="action" class="btn btn-outline-danger">静かさ</button>
+    <button type="submit" value="concentrations" name="action" class="btn btn-outline-danger">集中度</button>
+    <button type="submit" value="cost_pafo" name="action" class="btn btn-outline-danger">コスパ</button>
+    <button type="submit" value="conges" name="action" class="btn btn-outline-danger">混雑さ</button>
   </form>
   
-  </div>
-  
-{% for place in places %}
+</div>
 {% for eval in evals %}
+{% for place in places %}
 {% if place == eval.place_id %}
 
 <div class="card">
@@ -37,8 +42,8 @@
       
       </svg>
       <div>
-        <p>静か　:<span class="star5_rating" data-rate="{{ eval.concentrations }}"></span></p>
-        <p>集中　:<span class="star5_rating" data-rate="{{ eval.silence }}"></span></p>
+        <p>静か　:<span class="star5_rating" data-rate="{{ eval.silence }}"></span></p>
+        <p>集中　:<span class="star5_rating" data-rate="{{ eval.concentrations }}"></span></p>
         <p>コスパ:<span class="star5_rating" data-rate="{{ eval.cost_pafo }}"></span></p>
         <p>混雑さ:<span class="star5_rating" data-rate="{{ eval.conges }}"></span></p>
         

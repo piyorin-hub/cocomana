@@ -7,12 +7,35 @@ from django.contrib import messages
 def index(request):
      queries = request.GET.get('q')
      evals = Evals.objects.all()
-     print(evals)
+     action = request.GET.get('action')
+     
+     if action == "silence":
+
+         evals = Evals.objects.order_by('-silence')
+     elif action == "concentrations":
+         evals = Evals.objects.order_by('-concentrations')
+     elif action == "cost_pafo":
+         evals = Evals.objects.order_by('-cost_pafo')
+     elif action == "conges":
+         evals = Evals.objects.order_by('-conges')
+     else:
+         evals = Evals.objects.all()
+     places = Places.objects.all()
+     place_list =[]
+     for eval in evals:
+         for place in places:
+             if eval == place:
+                 place_list.append(place)
+
+
+
+     print(f"a{place_list}")
+
      if queries:
          if " " in queries or "　" in queries:
              queries = queries.split()
              for query in queries:
-                places = Places.objects.all().order_by()
+                
                 places.append = places.filter(
                     Q(place_name__icontains=query)|
                     Q(wifi__icontains=query)|
@@ -25,7 +48,7 @@ def index(request):
          else:
              query = queries
              print(query)
-             places = Places.objects.all().order_by()
+             
              places = places.filter(
                  Q(place_name__icontains=query)|
                  Q(wifi__icontains=query)|
@@ -75,7 +98,13 @@ def favorite(request, pk):
         favo_places.delete()
         favoo = True
         return redirect("search:index")
-    
+
+# class select(ListView):
+#     templete_name = 'index.html'
+#     model = Evals
+
+#     def get_queryset(request, self, **kwargs):
+#         return super().get_queryset(**kwargs)
 # class favo_exist(ListView):
 
 #     template_name = 'index.html'
