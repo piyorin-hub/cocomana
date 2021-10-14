@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
+from django.views.generic.list import ListView
 from users.models import Places, Evals, Favo
 from django.db.models import Q
+from django.contrib import messages
 
 def index(request):
      queries = request.GET.get('q')
@@ -39,20 +41,53 @@ def index(request):
          places = Places.objects.all().order_by()
      place_id = Places.objects.values('place_id')
      print(Places.objects.values('place_id'))
-          
+     user_id = request.user
+     favos = Favo.objects.values('favo_place_id').filter(favo_usr_id=user_id)
+     print(f"aa{favos}")
+     place_num = []
+     for favo_place in favos.values():
+         
+         place_num.append(favo_place['favo_place_id_id'])
+     
+     print(place_num)         
+     
      return render(request, "search/index.html", {
          'places': places, 'query': query,
-         'evals': evals
+         'evals': evals, 'favos':place_num
      })
+
 
 def favorite(request, pk):
     print(f"場所 {pk}")
     place_obj = Places.objects.get(place_id=pk)
     print(place_obj)
     user = request.user
-    favo = Favo(favo_place_id=place_obj, favo_usr_id=user)
-    favo.save()
-    return redirect("search:index")
+    
+    favo_places = Favo.objects.filter(favo_place_id=place_obj, favo_usr_id=user)
+    if not favo_places:
+        print(f"お気に入り{favo_places}")
+
+        favo = Favo(favo_place_id=place_obj, favo_usr_id=user)
+        favo.save()
+        return redirect("search:index")
+    else:
+        print("成功")
+        favo_places.delete()
+        favoo = True
+        return redirect("search:index")
+    
+# class favo_exist(ListView):
+
+#     template_name = 'index.html'
+#     model = Favo
+    
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         user_id = self.request.user
+#         place_id = self.request.GET.get('place_id')
+
+#         context[""] = 
+#         return context
     
     
     
