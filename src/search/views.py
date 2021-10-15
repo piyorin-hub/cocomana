@@ -5,6 +5,8 @@ from django.db.models import Q
 from django.contrib import messages
 
 def index(request):
+    #  if request.user.is_anonymous:#loginしていない場合勝手にloginページ
+    #     return redirect('users:login')
      queries = request.GET.get('q')
      evals = Evals.objects.all()
      action = request.GET.get('action')
@@ -64,23 +66,33 @@ def index(request):
          places = Places.objects.all().order_by()
      place_id = Places.objects.values('place_id')
      print(Places.objects.values('place_id'))
-     user_id = request.user
-     favos = Favo.objects.values('favo_place_id').filter(favo_usr_id=user_id)
-     print(f"aa{favos}")
-     place_num = []
-     for favo_place in favos.values():
+     
+     if request.user.is_anonymous:#loginしていない場合勝手にloginページ
+        return render(request, "search/index.html", {
+            'places': places, 'query': query,
+            'evals': evals,
+        })
+     else: 
+        user_id = request.user
+        favos = Favo.objects.values('favo_place_id').filter(favo_usr_id=user_id)
+        print(f"aa{favos}")
+        place_num = []
+        for favo_place in favos.values():
          
-         place_num.append(favo_place['favo_place_id_id'])
+            place_num.append(favo_place['favo_place_id_id'])
      
-     print(place_num)         
+        print(place_num)         
      
-     return render(request, "search/index.html", {
-         'places': places, 'query': query,
-         'evals': evals, 'favos':place_num
-     })
+        return render(request, "search/index.html", {
+            'places': places, 'query': query,
+            'evals': evals, 'favos':place_num
+        })
 
 
 def favorite(request, pk):
+    if request.user.is_anonymous:#loginしていない場合勝手にloginページ
+         return redirect('users:login')
+
     print(f"場所 {pk}")
     place_obj = Places.objects.get(place_id=pk)
     print(place_obj)

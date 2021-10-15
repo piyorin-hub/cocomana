@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'exa.layout.html' %}
 {% load static %}
 {% block  content %}   
 <link rel="stylesheet" href="{% static 'search/styles.css' %}">
@@ -7,9 +7,9 @@
 
 <div class="d-flex justify-content-center">
   <form class="form-inline my-2" method="GET" action="{% url 'search:index' %}">
-
+    
     <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
-    <button type="submit" value="q" class="btn btn-primary">検索</button>
+    <button type="submit" value="q" class="btn btn-primary" style="display: inline-block;">検索</button>
     
     <button type="submit" value="silence" name="action" class="btn btn-outline-danger">静かさ</button>
     <button type="submit" value="concentrations" name="action" class="btn btn-outline-danger">集中度</button>
@@ -64,7 +64,7 @@
             
         {% endif %}
         
-      <a href="{% url 'space:index' placeid=place.place_id %}" class="btn btn-primary">Go somewhere</a>
+      <a href="{% url 'space:index' placeid=place.place_id %}" class="btn btn-primary">詳細</a>
     </div>
   {% endif %}
   {% endfor %}
