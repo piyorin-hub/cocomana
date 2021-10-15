@@ -20,9 +20,10 @@ def returnGeocode(request):
     places = Places.objects.all()
     results = []
     for obj in places:
+        print(obj.place_name)
         adress = obj.prefecture + " " + obj.municipal + " " + obj.place_address
         adress_dic = gmaps.geocode(adress)
-        loc ={'id':obj.pk, 'lat':adress_dic[0]["geometry"]["location"]["lat"], 'lng':adress_dic[0]["geometry"]["location"]["lng"]}
+        loc ={'id':obj.pk, 'lat':adress_dic[0]["geometry"]["location"]["lat"], 'lng':adress_dic[0]["geometry"]["location"]["lng"], 'place_name':obj.place_name}
         results.append(loc)
 
 
