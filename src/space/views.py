@@ -9,7 +9,9 @@ from django.db.models import Sum
 from django.contrib import messages
 from .forms import SaveForm, EvalsForm
 
-def review(request,placeid):
+
+def generateView(request, placeid):
+
     if request.user.is_anonymous:#loginしていない場合勝手にloginページ
         return redirect('users:login')
     if request.method == 'POST': # If the form has been submitted...

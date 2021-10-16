@@ -25,7 +25,14 @@ class SignupForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('last_name', 'first_name', 'email','username', )
+        fields = ('last_name', 'first_name', 'email','username',)
+        labels = {
+            'last_name':"姓",
+            'first_name': "名",
+            'email':"メールアドレス",
+            'username' : "ユーザーネーム",
+        }
+
 
     def __init__(self, *args, **kwargs):
 

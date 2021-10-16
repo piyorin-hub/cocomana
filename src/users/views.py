@@ -39,16 +39,15 @@ class MyPage(OnlyYouMixin, generic.DetailView):
     model = User
     template_name = 'users/my_page.html'
 
-    def show(request):
-        space = Places.objects.first()
+    def my_page(request):
+        spaces = Places.objects.first()
         return render(request, 'users/my_page.html', {
-            'space': space
+            'spaces': spaces
         })
 
-    # def show_favorite(self, request):
+    # def my_page(self, request):
     #     user_id= self.request.user
-    #     # favo_place_id = Favo.objects.filter(user_id=user_id).all()
-    #     favo_place_id = user_id.favo_set.all()
+    #     favo_place_id = Favo.objects.filter(user_id=user_id).all()
     #     print(favo_place_id)
     #     #　favoにあるplace_idからplaceをとる
     #     favorite_places = Places.objects.filter(place_id=favo_place_id).all()

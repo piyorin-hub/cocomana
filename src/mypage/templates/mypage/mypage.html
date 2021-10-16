@@ -1,24 +1,73 @@
 {% extends 'layout.html' %}
-
-<!-- コンテンツ -->
+{% load static %}
 {% block content %}
-<div class="container">
-    <h1 class="mt-2">お気に入り{{ test.place_name }}</h1>
-    <hr>
+<link rel="stylesheet" href="{% static 'search/styles.css' %}">
+<!-- コンテンツ -->
 
-    {% for space in favorite_places %}
-    <div class="card" style="width: 18rem;">
+<div class="container">
+    <h1 class="mt-2">お気に入り</h1>
+    
+
+    {% for place in places %}
+        {% for eval in evals %}
+            {% if place == eval.place_id %}
+            <div class="card">
+                <h5 class="card-header">{{ place.place_name }}</h5>
+                <div class="card-body">
+                 
+                  <h5 class="card-title">概要</h5>
+            
+                  <div>
+                    <p>静か　:<span class="star5_rating" data-rate="{{ eval.concentrations }}"></span></p>
+                    <p>集中　:<span class="star5_rating" data-rate="{{ eval.silence }}"></span></p>
+                    <p>コスパ:<span class="star5_rating" data-rate="{{ eval.cost_pafo }}"></span></p>
+                    <p>混雑さ:<span class="star5_rating" data-rate="{{ eval.conges }}"></span></p>
+                    
+                  </div>
+                  {% if place.wifi %}
+                        <img src="{% static 'search/wifi.png' %}">
+                    {% else %}
+                        
+                    {% endif %}
+                    {% if place.charge %}
+                    　　<img src="{% static 'search/plug.png' %}">
+                    {% else %}
+                    
+                    {% endif %}
+                    {% if place.personal_space %}
+                    　　<img src="{% static 'search/key.png' %}">
+                    {% else %}
+                        
+                    {% endif %}
+                    
+                  <a href="{% url 'space:index' placeid=place.place_id %}" class="btn btn-primary">Go somewhere</a>
+            </div>
+              {% endif %}
+            {% endfor %}
+        {% endfor %}
+              
+        </div>
+            
+        {% endblock %}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+            <!-- <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h4 class="card-title">{{ space.place_name }}</h4>
-            <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
                 content.</p>
-            <a href="#" class="card-link">Card link</a> -->
+            <a href="#" class="card-link">Card link</a>
             <a href="{% url 'space/ '}" class="card-link">Another link</a>
         </div>
     </div>
-    {% endfor %}
-
+    
 
 </div>
-{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'exa.layout.html' %}
 {% load static %}
 {% block  content %}   
 <link rel="stylesheet" href="{% static 'search/styles.css' %}">
@@ -7,14 +7,19 @@
 
 <div class="d-flex justify-content-center">
   <form class="form-inline my-2" method="GET" action="{% url 'search:index' %}">
-   <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
-   <button type="submit" value="q" class="btn btn-primary">検索</button>
+    
+    <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
+    <button type="submit" value="q" class="btn btn-primary" style="display: inline-block;">検索</button>
+    
+    <button type="submit" value="silence" name="action" class="btn btn-outline-danger">静かさ</button>
+    <button type="submit" value="concentrations" name="action" class="btn btn-outline-danger">集中度</button>
+    <button type="submit" value="cost_pafo" name="action" class="btn btn-outline-danger">コスパ</button>
+    <button type="submit" value="conges" name="action" class="btn btn-outline-danger">混雑さ</button>
   </form>
   
-  </div>
-  
-{% for place in places %}
+</div>
 {% for eval in evals %}
+{% for place in places %}
 {% if place == eval.place_id %}
 
 <div class="card">
@@ -22,9 +27,23 @@
     <div class="card-body">
      
       <h5 class="card-title">概要</h5>
+      
+      <form method="post" action="{% url 'search:favorite' place.pk %}">
+        {% if place.place_id in favos %}
+          <button type="submit" name="button" onClick="window.alert('削除しました。')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg></button>
+          {% csrf_token %}
+        {% else %}
+        <button type="submit" name="button" onClick="window.alert('お気に入りに追加しました。')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg></button>
+          {% csrf_token %}
+        {% endif %}
+    </form>
+      
+      </svg>
       <div>
-        <p>静か　:<span class="star5_rating" data-rate="{{ eval.concentrations }}"></span></p>
-        <p>集中　:<span class="star5_rating" data-rate="{{ eval.silence }}"></span></p>
+        <p>静か　:<span class="star5_rating" data-rate="{{ eval.silence }}"></span></p>
+        <p>集中　:<span class="star5_rating" data-rate="{{ eval.concentrations }}"></span></p>
         <p>コスパ:<span class="star5_rating" data-rate="{{ eval.cost_pafo }}"></span></p>
         <p>混雑さ:<span class="star5_rating" data-rate="{{ eval.conges }}"></span></p>
         
@@ -45,7 +64,7 @@
             
         {% endif %}
         
-      <a href="{% url 'space:index' placeid=place.place_id %}" class="btn btn-primary">Go somewhere</a>
+      <a href="{% url 'space:index' placeid=place.place_id %}" class="btn btn-primary">詳細</a>
     </div>
   {% endif %}
   {% endfor %}
