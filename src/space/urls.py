@@ -6,5 +6,7 @@ app_name ='space'
 
 urlpatterns = [
     path('space/<int:placeid>/', views.index, name="index"),
-    path("add_review",views.generateView,name="add_review")
+    path("add_review/<int:placeid>",views.review,name="add_review"),
+    path("add_evaluation/<int:placeid>",views.evaluation,name="add_evaluation"),
+    path("<int:pk>", views.favorite, name="favorite")
 ]

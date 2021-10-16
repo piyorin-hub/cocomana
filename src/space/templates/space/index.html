@@ -1,46 +1,83 @@
 {% extends "layout_space.html" %}
 {% load static %}
-
-<!-- !コンテンツ -->
 {% block content %}
-
-{% block extrahead %}
 <link rel="stylesheet" href="{% static 'space/styles.css' %}">
-{% endblock %}
 
-<h1>{{ space.place_name }}</h1>
-{% if space.wifi %}
-    <img src="{% static 'space/wifi.png' %}">
-{% else %}
-    
-{% endif %}
-{% if space.charge %}
-　　<img src="{% static 'space/plug.png' %}">
-{% else %}
 
-{% endif %}
-{% if space.personal_space %}
-　　<img src="{% static 'space/key.png' %}">
-{% else %}
-    
-{% endif %}
-<div>
-  <p>静か　:<span class="star5_rating" data-rate="{{ evals.concentrations }}"></span></p>
-  <p>集中　:<span class="star5_rating" data-rate="{{ evals.silence }}"></span></p>
-  <p>コスパ:<span class="star5_rating" data-rate="{{ evals.cost_pafo }}"></span></p>
-  <p>混雑さ:<span class="star5_rating" data-rate="{{ evals.conges }}"></span></p>
-</div>
-<p>オープン時間{{ space.open_time }}</p>
-<p>クローズ時間{{ space.close_time }}</p>
-<p>住所：{{ space.prefecture }}{{ space.municipal }}{{ space.place_address }}</p>
-<p>コーヒーの値段：{{ space.place_cost }}</p>
-<div>
-  <h5>口コミ</h5>
-  {% for review in reviews %}
-    <p>ユーザーID　:{{ review.review_user_id }}</p>
-    <p>コメント　:{{ review.review_comment }}</p>
-  {% endfor %}
-  <a href="{% url 'space:add_review' %}" class="btn" style="border-radius: 5px;background-color: lightblue;padding: 10px;text-decoration: none;color: white;">レビューを追加する</a>
+
+<div　class = "card">
+  
+  <div class="border rounded" style="width: 330px; margin: 30px 40px 20px 30px; background-color: rgb(151, 159, 167); float: left;">
+    <h3 style="margin: 10px 20px;">{{ space.place_name }}</h3>
+  </div>
+  <div style="margin: 49px 0px 30px 50px;">
+    <form method="post" action="{% url 'space:favorite' space.pk %}">
+      {% if space.place_id in favos %}
+        <button type="submit" style="color: #EF93B6; width: 35px; height: 35px;" name="button" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg></button>
+        {% csrf_token %}
+      {% else %}
+      <button type="submit" style="width: 35px; height: 35px;"name="button" ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg></button>
+        {% csrf_token %}
+      {% endif %}
+    </form>
+  </div>
+  <div class="border rounded" style="width: 350px; margin: 10px 50px;">
+    <div style="margin: 20px 0px 0px 60px;">
+      {% if space.wifi %}
+          <img src="{% static 'space/wifi.png' %}" style="width: 45px;height: 45px; float: left; ">
+      {% else %}
+      <img src="{% static 'space/no_wifi.png' %}" style="width: 45px;height: 45px; float: left; ">
+      {% endif %}
+      {% if space.charge %}
+      <div style=" float: left;">
+      　　<img src="{% static 'space/plug.png' %}" style="width: 45px;height: 45px;">
+      </div>
+      {% else %}
+      <div style="padding-left: 30px; float: left;">
+        <img src="{% static 'space/no_plug.png' %}" style="width: 45px;height: 45px;">
+      </div>
+      {% endif %}
+      {% if space.personal_space %}
+      　　<img src="{% static 'space/key.png' %}" style="width: 45px;height: 45px;">
+      {% else %}
+      <div style="padding-left: 155px;">
+        <img src="{% static 'space/no_key1.png' %}" style="width: 45px;height: 45px;">
+      </div>
+      {% endif %}
+    </div>
+    <div class="border rounded" style="width: 250px; margin: 20px 0px 0px 30px; padding: 10px 0px 0px 15px; background-color: rgb(151, 159, 167); float: left;">
+        <p>静か　:<span class="star5_rating" data-rate="{{ evals.concentrations }}"></span></p>
+        <p>集中　:<span class="star5_rating" data-rate="{{ evals.silence }}"></span></p>
+        <p>コスパ:<span class="star5_rating" data-rate="{{ evals.cost_pafo }}"></span></p>
+        <p>混雑さ:<span class="star5_rating" data-rate="{{ evals.conges }}"></span></p>
+    </div>
+    <div style="padding: 90px 0px 90px 0px;">
+    <a href="{% url 'space:add_evaluation' placeid=space.place_id %}" class="btn" style="border-radius: 5px;background-color: rgb(245, 245, 137);padding: 10px;text-decoration: none;color: white; font-size: 15px;">星評価</a>
+    </div>
+    <div style="margin: 0px 0px 0px 30px;">
+      <p>オープン時間 : {{ space.open_time }}</p>
+      <p>クローズ時間 : {{ space.close_time }}</p>
+      <p>住所：{{ space.prefecture }}{{ space.municipal }}{{ space.place_address }}</p>
+      <p>コーヒーの値段：{{ space.place_cost }}円</p>
+    </div>
+    <div class="border-top" >
+      <h6 style="margin: 10px 0px 0px 10px; float: left;">(口コミ)</h6>
+      <div style="margin: 3px 0px 0px 240px;">
+      <a href="{% url 'space:add_review' placeid=space.place_id %}" class="btn" style= "border-radius: 5px;background-color: lightblue;padding: 10px;text-decoration: none;color: white; font-size: 10px;">口コミ</a>
+      </div>
+      <div style="font-size: 15px;">
+        {% for review in reviews %}
+        <div class="border-top border-bottom" style="width: 280px; margin: 10px 0px 10px 20px; padding: 5px 0px 0px 0px;">
+          <p style="margin: 0px 0px 0px 0px;">ID: {{ review.review_user_id }}</p>
+          <p class="border-top" style="margin: 0px 0px 0px 0px;">コメント:</p>
+          <p style="margin: 0px 0px 0px 10px;">{{ review.review_comment }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
 </div>
 
 {% endblock %}
