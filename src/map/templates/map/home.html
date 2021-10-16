@@ -27,10 +27,10 @@
 
 {% autoescape off %}
 data = {{ data }};
+searchAdress = {{ searchAdress }};
 {% endautoescape %}
 const ICON_W = 58/2;
 const ICON_H = 72/2;
-
 // 現在地取得処理
 function initMap() {
     // Geolocation APIに対応している
@@ -42,10 +42,17 @@ function initMap() {
                 // 緯度・経度を変数に格納
                 var mapLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
                 // マップオプションを変数に格納
-                var mapOptions = {
-                    zoom: 15,          // 拡大倍率
-                    center: mapLatLng  // 緯度・経度
-                };
+                if (searchAdress["None"] == 0) {
+                    var mapOptions = {
+                        zoom: 15,          // 拡大倍率
+                        center: mapLatLng  // 緯度・経度
+                    };
+                } else {
+                    var mapOptions = {
+                        zoom: 15,          // 拡大倍率
+                        center: new google.maps.LatLng(searchAdress["lat"], searchAdress["lng"])  // 緯度・経度
+                    };
+                }
                 // マップオブジェクト作成
                 var map = new google.maps.Map(
                     document.getElementById("map"), // マップを表示する要素

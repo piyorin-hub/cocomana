@@ -11,7 +11,7 @@ def returnGeocode(request):
     queries = request.POST.get('q')
     googleapikey = 'AIzaSyCmy9n811gkYviPHi50c7KnsFQb_Cc7Al4'
     gmaps = googlemaps.Client(key=googleapikey)
-    searchAdress = {}
+    searchAdress = {'None':0}
     if queries:
         adress_dic = gmaps.geocode(queries)
         searchAdress =  {'lat':adress_dic[0]["geometry"]["location"]["lat"], 'lng':adress_dic[0]["geometry"]["location"]["lng"]}
@@ -26,7 +26,6 @@ def returnGeocode(request):
         results.append(loc)
 
         #place_results = gmaps.places_nearby(location=loc, radius=1000, keyword='',language='ja') #半径1000m以内のカフェ情報を取得
-    print(results)
     return render(request, 'map/home.html', {
         "searchAdress":searchAdress,
         "data": results,
