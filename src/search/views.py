@@ -66,6 +66,14 @@ def index(request):
          places = Places.objects.all().order_by()
      place_id = Places.objects.values('place_id')
      print(Places.objects.values('place_id'))
+
+     print(f"場所：{places}")
+     evals_all = []
+     for place in places:
+         print(f"詳細：{place}")
+         
+         
+
      
      if request.user.is_anonymous:#loginしていない場合勝手にloginページ
         return render(request, "search/index.html", {
@@ -81,7 +89,8 @@ def index(request):
          
             place_num.append(favo_place['favo_place_id_id'])
      
-        print(place_num)         
+        print(place_num)
+         
      
         return render(request, "search/index.html", {
             'places': places, 'query': query,
