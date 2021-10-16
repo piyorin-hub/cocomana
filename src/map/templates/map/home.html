@@ -29,6 +29,8 @@ const data = [
   { name: "マクドナルド 西荻窪店", lat: 35.7039019, lng: 139.6021846 },
   { name: "杉並区立宮前図書館", lat: 35.6932137, lng: 139.5989132 }
 ];
+const ICON_W = 58/2;
+const ICON_H = 72/2;
 
 // 現在地取得処理
 function initMap() {
@@ -62,7 +64,11 @@ function initMap() {
                 // マーカーをつける
                 const marker = new google.maps.Marker({
                     position: {lat: d.lat, lng: d.lng},
-                    map: map
+                    map: map,
+                    icon: {
+                        url:  "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",// マーカーの画像を変更
+                        scaledSize : new google.maps.Size(ICON_W, ICON_H)
+                    }
                 });
 
                 // マーカークリックしたら地名をポップアップさせる
