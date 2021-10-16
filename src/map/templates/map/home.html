@@ -8,15 +8,15 @@
 </div> -->
 <!-- map -->
 
+<div id="map"></div>
 <div class="d-flex justify-content-center">
-  <form class="form-inline my-2" method="POST" action="">
+  <form class="form-inline my-2" method="POST" action="" id=fixed>
    {% csrf_token %}
    <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
    <button type="submit" value="q" class="btn btn-primary">検索</button>
   </form>
-  
-  </div>
-<div id="map"></div>
+</div>
+
 
 <!-- Google Map API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmy9n811gkYviPHi50c7KnsFQb_Cc7Al4&callback=initMap"
