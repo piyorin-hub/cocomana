@@ -10,7 +10,7 @@ from django.contrib import messages
 from .forms import SaveForm, EvalsForm
 
 
-def generateView(request, placeid):
+def review(request, placeid):
 
     if request.user.is_anonymous:#loginしていない場合勝手にloginページ
         return redirect('users:login')
@@ -29,6 +29,7 @@ def generateView(request, placeid):
         "review_form": review_form,
         "process_name": process_name,
     })
+
 
 def evaluation(request, placeid):
     if request.user.is_anonymous:#loginしていない場合勝手にloginページ
