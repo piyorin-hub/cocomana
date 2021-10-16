@@ -7,12 +7,28 @@
   <h1 class="text-center">ようこそ！CoCoまな へ</h1>
 </div> -->
 <!-- map -->
+
+<div class="d-flex justify-content-center">
+  <form class="form-inline my-2" method="POST" action="">
+   {% csrf_token %}
+   <input type="text" class="form-control" name="q" value="{{request.GET.q}}">
+   <button type="submit" value="q" class="btn btn-primary">検索</button>
+  </form>
+  
+  </div>
 <div id="map"></div>
 
 <!-- Google Map API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmy9n811gkYviPHi50c7KnsFQb_Cc7Al4&callback=initMap"
   async></script>
+
 <script type="text/javascript">
+// 表示データ
+const data = [
+  { name: "Starbucks Coffee 渋谷店", lat: 35.6598479, lng: 139.7003717 },
+  { name: "マクドナルド 西荻窪店", lat: 35.7039019, lng: 139.6021846 },
+  { name: "杉並区立宮前図書館", lat: 35.6932137, lng: 139.5989132 }
+];
 
 // 現在地取得処理
 function initMap() {
@@ -39,6 +55,24 @@ function initMap() {
                     map: map,             // 対象の地図オブジェクト
                     position: mapLatLng   // 緯度・経度
                 });
+                // 現在表示されているinfoWindowオブジェクト
+                let currentWindow;
+
+                data.map(d => {
+                // マーカーをつける
+                const marker = new google.maps.Marker({
+                    position: {lat: d.lat, lng: d.lng},
+                    map: map
+                });
+
+                // マーカークリックしたら地名をポップアップさせる
+                marker.addListener('click', () => {
+                    currentWindow && currentWindow.close();
+                    const infoWindow = new google.maps.InfoWindow({content: d.name});
+                    infoWindow.open(map, marker);
+                    currentWindow = infoWindow;
+                });
+                });
             },
             // 取得失敗した場合
             function (error) {
@@ -64,7 +98,7 @@ function initMap() {
         alert("この端末では位置情報が取得できません");
     }
 }
-  </script>
-  
+
+</script>
 
 {% endblock %}

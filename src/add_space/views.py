@@ -18,7 +18,7 @@ def generateView(request):
             #print("place",form.data)
             evals_form = Evals(place_id=place, user_id=request.user, concentrations=form.data.get("concentrations"), silence=form.data.get("silence"), cost_pafo=form.data.get("cost_pafo"), conges=form.data.get("conges"))
             evals = evals_form.save()
-            return redirect('users:top')
+            return redirect('map:home')
             
 
 

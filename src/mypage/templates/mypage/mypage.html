@@ -1,5 +1,5 @@
 
-{% extends 'layout.html' %}
+{% extends 'layout_addSpace.html' %}
 {% load static %}
 
 
@@ -46,23 +46,13 @@
                     
                   <a href="{% url 'space:index' placeid=place.place_id %}" class="btn btn-primary">Go somewhere</a>
             </div>
-              {% endif %}
-            {% endfor %}
+            {% endif %}
         {% endfor %}
+    {% endfor %}
               
-        </div>
+</div>
             
-        {% endblock %}
+{% endblock %}
     
     
     
-    
-    
-    
-    
-    
-    
-            <!-- <div class="card" style="width: 18rem;">
-    {% for space in favo_places %}
-    <div class="card" style="width: 18rem;">
-

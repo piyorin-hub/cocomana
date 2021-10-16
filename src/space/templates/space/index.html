@@ -1,4 +1,4 @@
-{% extends "layout_space.html" %}
+{% extends "layout_addSpace.html" %}
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'space/styles.css' %}">
@@ -8,7 +8,7 @@
 <div　class = "card">
   
   <div class="border rounded" style="width: 330px; margin: 30px 40px 20px 30px; background-color: rgb(151, 159, 167); float: left;">
-    <h3 style="margin: 10px 20px;">{{ space.place_name }}</h3>
+    <h3 style="margin: 10px 20px; padding: 5px; font-size: 20px;">{{ space.place_name }}</h3>
   </div>
   <div style="margin: 49px 0px 30px 50px;">
     <form method="post" action="{% url 'space:favorite' space.pk %}">
