@@ -1,5 +1,8 @@
+
 {% extends 'layout.html' %}
 {% load static %}
+
+
 {% block content %}
 <link rel="stylesheet" href="{% static 'search/styles.css' %}">
 <!-- コンテンツ -->
@@ -7,6 +10,7 @@
 <div class="container">
     <h1 class="mt-2">お気に入り</h1>
     
+
 
     {% for place in places %}
         {% for eval in evals %}
@@ -59,15 +63,6 @@
     
     
             <!-- <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h4 class="card-title">{{ space.place_name }}</h4>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="{% url 'space/ '}" class="card-link">Another link</a>
-        </div>
-    </div>
-    
+    {% for space in favo_places %}
+    <div class="card" style="width: 18rem;">
 
-</div>

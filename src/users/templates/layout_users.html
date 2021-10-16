@@ -1,6 +1,4 @@
-{% load static %}
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
     <!-- Required meta tags -->
@@ -9,50 +7,13 @@
 
     <!-- 互換表示の解除 -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{% static 'space/jquery.raty.js' %}"></script>
-    <title>スペースの詳細</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     
-    <script type="text/javascript">
-      function check() {
-        var concentrations = space_form.concentrations.value;
-        var cost_pafo = space_form.cost_pafo.value;
-        var silence = space_form.silence.value;
-        var conges = space_form.conges.value;
-        var category = space_form.place_category.value;
+    
 
-        if ( category == '' ) {
-          alert ( "スペースの種類を選択してください。" );
-          space_form.place_category.focus();
-          return false;
-        }
-        if ( concentrations == '' ) {
-          alert ( "集中度の評価をしてください。" );
-          space_form.concentrations.focus();
-          return false;
-        }
-        if ( silence == '' ) {
-          alert ( "静かさの評価をしてください。" );
-          space_form.silence.focus();
-          return false;
-        }
-        if ( cost_pafo == '' ) {
-          alert ( "コストパフォーマンスの評価をしてください。" );
-          space_form.cost_pafo.focus();
-          return false;
-        }
-        if ( conges == '' ) {
-          alert ( "空いている度の評価をしてください。" );
-          space_form.conges.focus();
-          return false;
-        }
-        return true;
-      }
-    </script>
+    <title>ユーザー登録・更新</title>
   </head>
   <body>
     <!-- ナビバー -->
@@ -66,15 +27,15 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'map:home' %}">Top</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'search:index' %}">Search</a>
+          </li>
           {% if not user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'users:login' %}">Log in</a>
             </li>
             <li class="nav-item m-1">
               <a class="nav-link" href="{% url 'users:signup' %}">Sign up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'search:index' %}">Search</a>
             </li>
           {% else %}
             <li class="nav-item">
@@ -98,6 +59,7 @@
         こんにちは！ {{ user.username }} さん
       {% endif %}
     </div>
+    
     {% block content %}{% endblock %}
 
     <!-- Optional JavaScript -->

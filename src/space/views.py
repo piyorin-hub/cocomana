@@ -64,7 +64,6 @@ def index(request,placeid):
     obj_2 = Evals.objects.filter(place_id = placeid).aggregate(silence = Sum('silence'))
     obj_3 = Evals.objects.filter(place_id = placeid).aggregate(cost_pafo = Sum('cost_pafo'))
     obj_4 = Evals.objects.filter(place_id = placeid).aggregate(conges = Sum('conges'))
-    
     evals["concentrations"] = round( obj_1["concentrations"] / product_count)
     evals["silence"] = round( obj_2["silence"] / product_count)
     evals["cost_pafo"] = round( obj_3["cost_pafo"] / product_count)
