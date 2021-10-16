@@ -135,4 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ログイン
 LOGIN_URL = 'users:login' # ログインのURLの設定
-LOGIN_REDIRECT_URL = 'users:top' #ログインが完了した後に遷移するURL
+LOGIN_REDIRECT_URL = 'map:home' #ログインが完了した後に遷移するURL
