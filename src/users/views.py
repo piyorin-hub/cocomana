@@ -12,6 +12,7 @@ from users.models import Places, Favo
 class Login(LoginView):
     form_class = LoginForm
     template_name = 'users/login.html'
+    
 
 
 '''ログアウト'''
