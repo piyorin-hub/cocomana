@@ -67,13 +67,11 @@ def index(request):
      place_id = Places.objects.values('place_id')
      print(Places.objects.values('place_id'))
 
-     print(f"場所：{places}")
-     evals_all = []
-     for place in places:
-         print(f"詳細：{place}")
-         
-         
-
+    #  print(f"場所：{places}")
+    #  evals_all = []
+    #  for place in places:
+    #      print(f"詳細：{place}")
+          
      
      if request.user.is_anonymous:#loginしていない場合勝手にloginページ
         return render(request, "search/index.html", {
