@@ -17,11 +17,11 @@
         <h5 class="card-header">現在地</h5>
         <div class="card-body">
         
-        <h5 class="card-title">lat:{{ now_adress.lat }}, lng:{{ now_adress.lng }}</h5>
+        <h5 class="card-title">lat:{{ searchAdress.lat }}, lng:{{ searchAdress.lng }}</h5>
         </div>
     </div>
 
-{% for result in results %}
+{% for result in data %}
 
 <div class="card">
     <h5 class="card-header">{{ result.place_name }}</h5>
