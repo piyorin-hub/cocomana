@@ -7,11 +7,11 @@ class SaveForm(forms.ModelForm):
 
     class Meta:
         model = Reviews
-        fields = ('review_user_id','review_comment')
+        fields = ('review_comment',)
         labels = {
-            'review_user_id':"ユーザーのid",
-            'review_comment':"レビューのコメント",
+            'review_comment':"レビュー",
         }
+        
         exclude = ('review_place_id',)
 
 class EvalsForm(forms.ModelForm):
