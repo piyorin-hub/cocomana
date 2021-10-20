@@ -68,14 +68,43 @@ function initMap() {
 
                 data.map(d => {
                 // マーカーをつける
-                const marker = new google.maps.Marker({
-                    position: {lat: d.lat, lng: d.lng},
-                    map: map,
-                    icon: {
-                        url:  "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",// マーカーの画像を変更
-                        scaledSize : new google.maps.Size(ICON_W, ICON_H)
-                    }
-                });
+                if (d.strong == "concentrations") {
+                    const marker = new google.maps.Marker({
+                        position: {lat: d.lat, lng: d.lng},
+                        map: map,
+                        icon: {
+                            url:  "https://maps.google.com/mapfiles/ms/icons/red-dot.png",// マーカーの画像を変更
+                            scaledSize : new google.maps.Size(ICON_W, ICON_H)
+                        }
+                    });
+                } else if (d.strong == "silence"){
+                    const marker = new google.maps.Marker({
+                        position: {lat: d.lat, lng: d.lng},
+                        map: map,
+                        icon: {
+                            url:  "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",// マーカーの画像を変更
+                            scaledSize : new google.maps.Size(ICON_W, ICON_H)
+                        }
+                    });
+                } else if (d.strong == "cost_pafo"){
+                    const marker = new google.maps.Marker({
+                        position: {lat: d.lat, lng: d.lng},
+                        map: map,
+                        icon: {
+                            url:  "https://maps.google.com/mapfiles/ms/icons/green-dot.png",// マーカーの画像を変更
+                            scaledSize : new google.maps.Size(ICON_W, ICON_H)
+                        }
+                    });
+                } else {
+                    const marker = new google.maps.Marker({
+                        position: {lat: d.lat, lng: d.lng},
+                        map: map,
+                        icon: {
+                            url:  "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png",// マーカーの画像を変更
+                            scaledSize : new google.maps.Size(ICON_W, ICON_H)
+                        }
+                    });
+                }
 
                 // マーカークリックしたら地名をポップアップさせる
                 marker.addListener('click', () => {
