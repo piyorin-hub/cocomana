@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from users.models import Places, Evals, Favo
-from django.db.models import Q
+from django.db.models import Q, Avg
 from django.contrib import messages
 
 def index(request):
@@ -71,12 +71,12 @@ def index(request):
     #  evals_all = []
     #  for place in places:
     #      print(f"詳細：{place}")
-          
-     
-     if request.user.is_anonymous:#loginしていない場合勝手にloginページ
+     place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges'))
+     print(f"静か：{place_evals}")
+     if request.user.is_anonymous:
         return render(request, "search/index.html", {
             'places': places, 'query': query,
-            'evals': evals,
+            'evals': place_evals,
         })
      else: 
         user_id = request.user
@@ -92,7 +92,7 @@ def index(request):
      
         return render(request, "search/index.html", {
             'places': places, 'query': query,
-            'evals': evals, 'favos':place_num
+            'evals': place_evals, 'favos':place_num
         })
 
 

@@ -23,13 +23,13 @@
 </div>
 {% for eval in evals %}
 {% for place in places %}
-{% if place == eval.place_id %}
+{% if place.place_id == eval.place_id_id %}
 
 <div class="card">
     <h5 class="card-header">{{ place.place_name }}</h5>
     <div class="card-body">
      
-      <h5 class="card-title">概要</h5>
+      <h5 class="card-title">概要 {{eval.avg_conges}}</h5>
       
       <form method="post" action="{% url 'search:favorite' place.pk %}">
         {% if place.place_id in favos %}
@@ -44,11 +44,13 @@
     </form>
       
       </svg>
+
       <div>
-        <p>静か　:<span class="star5_rating" data-rate="{{ eval.silence }}"></span></p>
-        <p>集中　:<span class="star5_rating" data-rate="{{ eval.concentrations }}"></span></p>
-        <p>コスパ:<span class="star5_rating" data-rate="{{ eval.cost_pafo }}"></span></p>
-        <p>混雑さ:<span class="star5_rating" data-rate="{{ eval.conges }}"></span></p>
+
+        <p>静か　:<span class="star5_rating" data-rate="{{ eval.avg_silence|floatformat }}"></span></p>
+        <p>集中　:<span class="star5_rating" data-rate="{{ eval.avg_concentrations|floatformat }}"></span></p>
+        <p>コスパ:<span class="star5_rating" data-rate="{{ eval.avg_cost_pafo|floatformat }}"></span></p>
+        <p>混雑さ:<span class="star5_rating" data-rate="{{ eval.avg_conges|floatformat }}"></span></p>
         
       </div>
       {% if place.wifi %}
