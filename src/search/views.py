@@ -9,17 +9,19 @@ def index(request):
     #     return redirect('users:login')
      queries = request.GET.get('q')
      evals = Evals.objects.all()
+     place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges'))
      action = request.GET.get('action')
      
      if action == "silence":
 
-         evals = Evals.objects.order_by('-silence')
+         place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges')).order_by('-avg_silence')
+         print(place_evals)
      elif action == "concentrations":
-         evals = Evals.objects.order_by('-concentrations')
+         place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges')).order_by('-avg_concentrations')
      elif action == "cost_pafo":
-         evals = Evals.objects.order_by('-cost_pafo')
+         place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges')).order_by('-avg_cost_pafo')
      elif action == "conges":
-         evals = Evals.objects.order_by('-conges')
+         place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges')).order_by('-avg_conges')
      else:
          evals = Evals.objects.all()
      places = Places.objects.all()
@@ -71,7 +73,7 @@ def index(request):
     #  evals_all = []
     #  for place in places:
     #      print(f"詳細：{place}")
-     place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges'))
+     
      print(f"静か：{place_evals}")
      if request.user.is_anonymous:
         return render(request, "search/index.html", {

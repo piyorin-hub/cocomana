@@ -29,7 +29,7 @@
     <h5 class="card-header">{{ place.place_name }}</h5>
     <div class="card-body">
      
-      <h5 class="card-title">概要 {{eval.avg_conges}}</h5>
+      <h5 class="card-title">概要</h5>
       
       <form method="post" action="{% url 'search:favorite' place.pk %}">
         {% if place.place_id in favos %}
