@@ -37,7 +37,7 @@
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg></button>
           {% csrf_token %}
         {% else %}
-        <button type="submit" name="button" onClick="window.alert('お気に入りに追加しました。')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+        <button type="submit" name="button" style="color: #EF93B6; width: 35px; height: 35px;" onClick="window.alert('お気に入りに追加しました。')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg></button>
           {% csrf_token %}
         {% endif %}
