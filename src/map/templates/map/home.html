@@ -52,9 +52,17 @@ function initMap() {
                     mapOptions         // マップオプション
                 );
                 //　マップにマーカーを表示する
-                var marker = new google.maps.Marker({
+                var currentmarker = new google.maps.Marker({
                     map: map,             // 対象の地図オブジェクト
-                    position: mapLatLng   // 緯度・経度
+                    position: mapLatLng,   // 緯度・経度
+                    icon: {
+                        fillColor: "#1E90FF",                //塗り潰し色
+                        fillOpacity: 10,                    //塗り潰し透過率
+                        path: google.maps.SymbolPath.CIRCLE, //円を指定
+                        scale: 12,                           //円のサイズ
+                        strokeColor: "#FFFFFF",              //枠の色
+                        strokeWeight: 3.0                    //枠の透過率
+                    }
                 });
                 // 現在表示されているinfoWindowオブジェクト
                 let currentWindow;
