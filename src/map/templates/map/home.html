@@ -3,9 +3,6 @@
 <!-- コンテンツ -->
 {% block content %}
 
-<!-- <div class="container">
-  <h1 class="text-center">ようこそ！CoCoまな へ</h1>
-</div> -->
 <!-- map -->
 
 <div id="map"></div>
@@ -19,9 +16,9 @@
 
 
 <!-- Google Map API -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmy9n811gkYviPHi50c7KnsFQb_Cc7Al4&callback=initMap"
-  async></script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmy9n811gkYviPHi50c7KnsFQb_Cc7Al4&callback=initMap" async></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkz-_Z2fsy6wBun5egISLBjCOaWO4sU5Y&callback=initMap" -->
+    async></script>
 
 <script type="text/javascript">
 
@@ -80,12 +77,34 @@ function initMap() {
                         }
                     });
                     // マーカークリックしたら地名をポップアップさせる
+                    // marker.addListener('click', () => {
+                    //     currentWindow && currentWindow.close();
+                    //     const infoWindow = new google.maps.InfoWindow({content: d.name});
+                    //     infoWindow.open(map, marker);
+                    //     currentWindow = infoWindow;
+                    // });
+                    //マーカークリック時の操作
                     marker.addListener('click', () => {
                         currentWindow && currentWindow.close();
-                        const infoWindow = new google.maps.InfoWindow({content: d.name});
+                        let placeid= d.id;
+                        console.log('id', d.id);
+                        console.log('para', d.para);
+                        const windowContent =
+                            '<div id="content">' +
+                            '<h3 id="firstHeading" class="firstHeading">' + d.name + ' </h3>' +
+                            '<div id="bodyContent">' +
+                            '<p>' + d.adress + '</p>' +
+                            '<p>集中度：' +
+                            '<span class="star5_rating" data-rate="' + d.para + '" ></span >' +
+                            '</p>' +
+                            '<p><a href="../space/space/' + placeid + '">詳細</a>' + '</p>' +
+                            '</div>' +
+                            '</div>';
+                        const infoWindow = new google.maps.InfoWindow({ content: windowContent });
                         infoWindow.open(map, marker);
                         currentWindow = infoWindow;
                     });
+
                 } else if (d.strong == "silence"){
                     const marker = new google.maps.Marker({
                         position: {lat: d.lat, lng: d.lng},
@@ -95,12 +114,28 @@ function initMap() {
                             scaledSize : new google.maps.Size(ICON_W, ICON_H)
                         }
                     });
+                    //マーカークリック時の操作
                     marker.addListener('click', () => {
                         currentWindow && currentWindow.close();
-                        const infoWindow = new google.maps.InfoWindow({content: d.name});
+                        let placeid= d.id;
+                        console.log('id', d.id);
+                        console.log('para', d.para);
+                        const windowContent =
+                            '<div id="content">' +
+                            '<h3 id="firstHeading" class="firstHeading">' + d.name + ' </h3>' +
+                            '<div id="bodyContent">' +
+                            '<p>' + d.adress + '</p>' +
+                            '<p>静かさ：' +
+                            '<span class="star5_rating" data-rate="' + d.para + '" ></span >' +
+                            '</p>' +
+                            '<p><a href="../space/space/' + placeid + '">詳細</a>' + '</p>' +
+                            '</div>' +
+                            '</div>';
+                        const infoWindow = new google.maps.InfoWindow({ content: windowContent });
                         infoWindow.open(map, marker);
                         currentWindow = infoWindow;
                     });
+
                 } else if (d.strong == "cost_pafo"){
                     const marker = new google.maps.Marker({
                         position: {lat: d.lat, lng: d.lng},
@@ -110,24 +145,55 @@ function initMap() {
                             scaledSize : new google.maps.Size(ICON_W, ICON_H)
                         }
                     });
+                    //マーカークリック時の操作
                     marker.addListener('click', () => {
                         currentWindow && currentWindow.close();
-                        const infoWindow = new google.maps.InfoWindow({content: d.name});
+                        let placeid= d.id;
+                        console.log('id', d.id);
+                        console.log('para', d.para);
+                        const windowContent =
+                            '<div id="content">' +
+                            '<h3 id="firstHeading" class="firstHeading">' + d.name + ' </h3>' +
+                            '<div id="bodyContent">' +
+                            '<p>' + d.adress + '</p>' +
+                            '<p>コスパ：' +
+                            '<span class="star5_rating" data-rate="' + d.para + '" ></span >' +
+                            '<p><a href="../space/space/' + placeid + '">詳細</a>' + '</p>' +
+                            '</p>' +
+                            '</div>' +
+                            '</div>';
+                        const infoWindow = new google.maps.InfoWindow({ content: windowContent });
                         infoWindow.open(map, marker);
                         currentWindow = infoWindow;
                     });
+
                 } else {
                     const marker = new google.maps.Marker({
                         position: {lat: d.lat, lng: d.lng},
                         map: map,
                         icon: {
-                            url:  "http://chart.apis.google.com/chart?chst=d_text_outline&chld=FFCC33|16|h|FF0000|b|空",// マーカーの画像を変更
+                            url: "http://chart.apsis.google.com/chart?chst=d_text_outline&chld=FFCC33|16|h|FF0000|b|空",// マーカーの画像を変更
                             scaledSize : new google.maps.Size(ICON_W, ICON_H)
-                        }
+                        },
                     });
+                    //マーカークリック時の操作
                     marker.addListener('click', () => {
                         currentWindow && currentWindow.close();
-                        const infoWindow = new google.maps.InfoWindow({content: d.name});
+                        let placeid= d.id;
+                        console.log('id', d.id);
+                        console.log('para',d.para);
+                        const windowContent =
+                            '<div id="content">' +
+                            '<h3 id="firstHeading" class="firstHeading">'+ d.name +' </h3>' +
+                            '<div id="bodyContent">' +
+                            '<p>'+ d.adress +'</p>' +
+                            '<p>混雑さ：'+
+                            '<span class="star5_rating" data-rate="'+ d.para +'" ></span>'+
+                            '</p>'+
+                            '<p><a href="../space/space/'+ placeid +'">詳細</a>' + '</p>' +
+                            '</div>'+
+                            '</div>';
+                        const infoWindow = new google.maps.InfoWindow({content:windowContent});
                         infoWindow.open(map, marker);
                         currentWindow = infoWindow;
                     });
