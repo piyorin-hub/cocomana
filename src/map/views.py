@@ -38,9 +38,10 @@ def returnGeocode(request):
         evals["conges"] = obj_4["conges"] / count
         strong = max(evals, key=evals.get)
         print(strong)
-        loc ={'id':obj.pk, "name":obj.place_name , 'lat':adress_dic[0]["geometry"]["location"]["lat"], 'lng':adress_dic[0]["geometry"]["location"]["lng"], 'place_name':obj.place_name, 'strong':strong}
+        print(evals[strong])
+        loc ={'id':obj.pk, "name":obj.place_name , 'lat':adress_dic[0]["geometry"]["location"]["lat"], 'lng':adress_dic[0]["geometry"]["location"]["lng"], 'adress':adress, 'strong':strong, 'para':evals[strong]}
         results.append(loc)
-
+        
         #place_results = gmaps.places_nearby(location=loc, radius=1000, keyword='',language='ja') #半径1000m以内のカフェ情報を取得
     return render(request, 'map/home.html', {
         "searchAdress":searchAdress,
