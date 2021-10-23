@@ -9,7 +9,7 @@
 <div class="d-flex justify-content-center">
     <form class="form-inline my-2" method="POST" action="" id=fixed>
     {% csrf_token %}
-    <input type="text" class="form-control ml-3" name="q" value="{{request.GET.q}}"　placeholder="住所を入力してください">
+    <input type="text" class="form-control ml-3" name="q" value="{{request.GET.q}}" placeholder="住所を入力してください">
     <button type="submit" value="q" class="btn btn-primary">検索</button>
     </form>
 </div>
