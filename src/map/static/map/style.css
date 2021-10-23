@@ -26,7 +26,7 @@
     width: 300px !important;
     top: 15px !important;
     left: 0 !important;
-    background-color: #fff;
+    background-color: #FFDEAD;
     border-radius: 2px 2px 0 0;
 }
 
@@ -35,7 +35,8 @@
 }
 
 .firstHeading {
-	background-color: #4285F4;
+	/* background-color:rgb(199, 159, 108); */
+    background-color: #a0522d;
 }
 
 .firstHeading {
