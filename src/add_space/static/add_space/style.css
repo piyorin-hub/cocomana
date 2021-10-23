@@ -1,0 +1,28 @@
+.btn--red {
+  color: #fff;
+  background-color: #c79f6c;
+}
+
+.btn--red.btn--border-inset {
+  border: 6px inset #c79f6c;
+}
+
+/*その他と主な共通部分は省略*/
+
+.btn-solid {
+  color: #fff;
+  border-top: 4px solid #c79f6c;
+  border-right: 4px solid #856c4a;
+  border-bottom: 4px solid #856c4a;
+  border-left: 4px solid #c79f6c;
+  border-radius: 0;
+  background: #c79f6c;
+}
+
+.btn-solid:hover {
+  color: #fff;
+  border-top: 4px solid #856c4a;
+  border-right: 4px solid #c79f6c;
+  border-bottom: 4px solid #c79f6c;
+  border-left: 4px solid #856c4a;
+}

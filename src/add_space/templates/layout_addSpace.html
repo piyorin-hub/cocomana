@@ -24,7 +24,13 @@
         var silence = space_form.silence.value;
         var conges = space_form.conges.value;
         var category = space_form.place_category.value;
+        var prefecture = space_form.prefecture.value;
 
+        if ( prefecture == '' ) {
+          alert ( "都道府県を選択してください。" );
+          space_form.prefecture.focus();
+          return false;
+        }
         if ( category == '' ) {
           alert ( "スペースの種類を選択してください。" );
           space_form.place_category.focus();
