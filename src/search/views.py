@@ -15,7 +15,7 @@ def index(request):
      if action == "silence":
 
          place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges')).order_by('-avg_silence')
-         print(place_evals)
+         
      elif action == "concentrations":
          place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges')).order_by('-avg_concentrations')
      elif action == "cost_pafo":
@@ -61,20 +61,20 @@ def index(request):
                  Q(municipal__icontains=query)|
                  Q(place_address__icontains=query)
                  ).distinct()
-             print(places)
+             
 
      else:
          query = queries
          places = Places.objects.all().order_by()
      place_id = Places.objects.values('place_id')
-     print(Places.objects.values('place_id'))
+     
 
     #  print(f"場所：{places}")
     #  evals_all = []
     #  for place in places:
     #      print(f"詳細：{place}")
      
-     print(f"静か：{place_evals}")
+     
      if request.user.is_anonymous:
         return render(request, "search/index.html", {
             'places': places, 'query': query,
@@ -89,7 +89,7 @@ def index(request):
          
             place_num.append(favo_place['favo_place_id_id'])
      
-        print(place_num)
+        
          
      
         return render(request, "search/index.html", {
@@ -109,7 +109,7 @@ def favorite(request, pk):
     
     favo_places = Favo.objects.filter(favo_place_id=place_obj, favo_usr_id=user)
     if not favo_places:
-        print(f"お気に入り{favo_places}")
+        
 
         favo = Favo(favo_place_id=place_obj, favo_usr_id=user)
         favo.save()
