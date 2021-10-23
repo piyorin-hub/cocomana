@@ -10,8 +10,27 @@
     <form class="form-inline my-2" method="POST" action="" id=fixed>
     {% csrf_token %}
     <input type="text" class="form-control ml-3" name="q" value="{{request.GET.q}}" placeholder="住所を入力してください">
-    <button type="submit" value="q" class="btn btn-primary">検索</button>
+    <button type="submit" value="q" class="btn btn-secondary">検索</button>
     </form>
+</div>
+
+<div class="box2">
+    <div class="flex">
+        <figure class="image"><img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=集|33cc00|ffffff" alt=""></figure>
+        <p class="text">CoCo 集中出来る</p>
+    </div>
+    <div class="flex">
+        <figure class="image"><img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=静|0099ff|ffffff" alt=""></figure>
+        <p class="text">CoCo 静か</p>
+    </div>
+    <div class="flex">
+        <figure class="image"><img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=金|ffcc33|ffffff" alt=""></figure>
+        <p class="text">CoCo コスパの良い</p>
+    </div>
+    <div class="flex">
+        <figure class="image"><img src="http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=空|ff6666|ffffff" alt=""></figure>
+        <p class="text">CoCo 空いている</p>
+    </div>
 </div>
 
 <!-- Google Map API -->
