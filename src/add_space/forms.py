@@ -10,7 +10,6 @@ class SaveForm(forms.ModelForm):
         fields = ('place_name', 'open_time', 'close_time','prefecture','municipal','place_address', 'wifi', 'charge', 'personal_space', 'place_cost', 'place_category')
         widgets = {
             'place_name': forms.Textarea(attrs={'rows':1}),
-            'prefecture': forms.Textarea(attrs={'rows':1, 'cols':15}),
             'municipal': forms.Textarea(attrs={'rows':1}),
             'place_address': forms.Textarea(attrs={'rows':1}),
         }
