@@ -11,6 +11,7 @@ def generateView(request):
         form = SaveForm(request.POST)
         if form.is_valid(): # All validation rules pass
             #存在しているかのチェック同じものがあれば評価は消してupdata。評価追加 municipal place_address
+            print("成功")
             Places.objects.filter(prefecture=form.data.get("prefecture"), municipal=form.data.get("municipal"), place_address=form.data.get("place_address")).delete()
             #同じ住所が存在しないからsave
             place = form.save()
