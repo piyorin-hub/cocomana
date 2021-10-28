@@ -8,9 +8,6 @@ from users.models import Places, Evals
 # class TopView(generic.TemplateView):
 #     template_name = 'map/home.html'
 
-def images(request):
-    return render(request, 'map/test.html')
-
 def returnGeocode(request):
     queries = request.POST.get('q')
     googleapikey = 'AIzaSyCmy9n811gkYviPHi50c7KnsFQb_Cc7Al4'
