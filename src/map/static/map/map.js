@@ -46,8 +46,6 @@ function initMap() {
 
                 data.map(d => {
                 // マーカーをつける
-                //https://maps.google.com/mapfiles/ms/icons/red-dot.png
-                //https://maps.google.com/mapfiles/ms/icons/blue-dot.png
                 if (d.strong == "concentrations") {
                     const marker = new google.maps.Marker({
                         position: {lat: d.lat, lng: d.lng},

@@ -3,6 +3,7 @@ from users.models import Places, Favo, Evals
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views import generic
 from django.contrib.auth.models import User
+from django.db.models import Q, Avg
 
 
 # class MypageView(generic.TemplateView):
@@ -13,13 +14,14 @@ def MypageView(request):
     user = request.user
     # favo_table = Favo.objects.filter(favo_usr_id=user).all()
     place_id_list = Favo.objects.values("favo_place_id").filter(favo_usr_id=user)
+    place_evals = Evals.objects.all().values('place_id_id').annotate(avg_silence=Avg('silence')).annotate(avg_concentrations=Avg('concentrations')).annotate(avg_cost_pafo=Avg('cost_pafo')).annotate(avg_conges=Avg('conges'))
     print(place_id_list)
     places =[]
     for favo_place in place_id_list.values():
         places.append(Places.objects.get(pk=favo_place['favo_place_id_id']))
     print(places)
     return render(request, "mypage/mypage.html", {
-        'places': places, 'evals': evals,
+        'places': places, 'evals': place_evals,
     })
 
     
