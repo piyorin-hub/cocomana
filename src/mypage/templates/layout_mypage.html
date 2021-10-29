@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="ja">
 
@@ -19,7 +20,8 @@
 <body>
     <!-- ナビバー -->
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-        <a class="navbar-brand" href="{% url 'map:home' %}">CoCoまな</a>
+        <a class="navbar-brand" href="{% url 'map:home' %}" style="font-size: 35px;"><img src="{% static 'add_space:images:cup.png' %}"
+        style="height: 45px; margin-bottom: 10px;">CoCoまな</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
