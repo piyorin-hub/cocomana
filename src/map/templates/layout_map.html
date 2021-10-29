@@ -60,11 +60,17 @@
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'add_space:add_space' %}">スペース追加</a>
                 </li>
+              {% endif %}
+              </ul>
+          </div>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              {% if user.is_authenticated %}
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'users:logout' %}">ログアウト</a>
                 </li>
               {% endif %}
-              </ul>
+            </ul>
           </div>
     </nav>
     <!-- コンテンツ -->
