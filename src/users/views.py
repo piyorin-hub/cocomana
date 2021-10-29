@@ -41,19 +41,6 @@ class MyPage(OnlyYouMixin, generic.DetailView):
             'spaces': spaces
         })
 
-    # def my_page(self, request):
-    #     user_id= self.request.user
-    #     favo_place_id = Favo.objects.filter(user_id=user_id).all()
-    #     print(favo_place_id)
-    #     #　favoにあるplace_idからplaceをとる
-    #     favorite_places = Places.objects.filter(place_id=favo_place_id).all()
-        
-    #     return render(request, "users/my_page.html", {
-    #         'favorite_places':favorite_places
-    #     })
-
-
-
 '''サインアップ'''
 class Signup(generic.CreateView):
     template_name = 'users/user_form.html'

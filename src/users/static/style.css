@@ -1,0 +1,17 @@
+.btn-solid {
+    color: #fff;
+    border-top: 2px solid #c79f6c;
+    border-right: 2px solid #856c4a;
+    border-bottom: 2px solid #856c4a;
+    border-left: 2px solid #c79f6c;
+    border-radius: 0;
+    background: #c79f6c;
+  }
+  
+  .btn-solid:hover {
+    color: #fff;
+    border-top: 2px solid #856c4a;
+    border-right: 2px solid #c79f6c;
+    border-bottom: 2px solid #c79f6c;
+    border-left: 2px solid #856c4a;
+  }
