@@ -12,7 +12,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'add_space/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'add_space/style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static 'add_space/jquery.raty.js' %}"></script>
     <title>スペースの登録</title>
@@ -24,7 +24,13 @@
         var silence = space_form.silence.value;
         var conges = space_form.conges.value;
         var category = space_form.place_category.value;
+        var prefecture = space_form.prefecture.value;
 
+        if ( prefecture == '' ) {
+          alert ( "都道府県を選択してください。" );
+          space_form.prefecture.focus();
+          return false;
+        }
         if ( category == '' ) {
           alert ( "スペースの種類を選択してください。" );
           space_form.place_category.focus();
@@ -73,7 +79,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'users:login' %}">ログイン</a>
             </li>
-            <li class="nav-item m-1">
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'users:signup' %}">サインアップ</a>
             </li>
           {% else %}
